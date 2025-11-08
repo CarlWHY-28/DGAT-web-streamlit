@@ -6,18 +6,18 @@ import requests
 import numpy as np
 
 import scanpy as sc
-import torch
+#import torch
 import warnings
-import pandas as pd
+#import pandas as pd
 import torch
-from torch_geometric.loader import DataLoader
-from Model.dgat import GATEncoder, Decoder_Protein, Decoder_mRNA
+#from torch_geometric.loader import DataLoader
+#from Model.dgat import GATEncoder, Decoder_Protein, Decoder_mRNA
 from utils.Preprocessing import qc_control_cytassist, normalize, clean_protein_names, fill_genes, preprocess_ST
 from Model.Train_and_Predict import train_and_evaluate_fold, protein_predict,get_activity
 
 import random
 import os
-from muon import prot as pt
+#from muon import prot as pt
 
 #from utils.idk_utils import leiden_plot, find_edges,leiden_plot_scatter, leiden_plot_eva, plot_spatial_expression,merge_celltypes, infer_celltype_activity, plot_heatmap
 
