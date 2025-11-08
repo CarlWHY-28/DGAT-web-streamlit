@@ -1,4 +1,4 @@
-from muon import prot as pt
+#from muon import prot as pt
 import scanpy as sc
 from collections import defaultdict
 import re
