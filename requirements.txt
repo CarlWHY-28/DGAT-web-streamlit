@@ -4,7 +4,7 @@ streamlit==1.38.0
 rich==13.9.4
 
 # ===== Numeric stack (Py3.11 稳定组合，并与 scanpy 1.11 兼容) =====
-numpy==1.26.4
+numpy==1.25.2
 scipy==1.13.1
 pandas==2.2.2
 matplotlib==3.8.4
