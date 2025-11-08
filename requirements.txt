@@ -22,12 +22,12 @@ scikit-learn==1.4.2
 # ===== PyTorch (CPU) =====
 # 使用官方 CPU 轮子，避免 CUDA 约束
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.4.1+cpu
-
-# ===== PyTorch Geometric (匹配 torch 2.4.1 CPU) =====
-# PyG 需要显式 find-links 指向其轮子仓库
---find-links https://data.pyg.org/whl/torch-2.4.1+cpu.html
-torch_geometric==2.6.1
+torch==2.3.1
+-f https://data.pyg.org/whl/torch-2.3.1+cpu.html
+torch_geometric==2.5.3
+torch_scatter==2.1.2
+torch_sparse==0.6.18
+pyg_lib==0.4.0
 
 # ===== Graph / community detection（可选）=====
 # 注意：pypi 上真实包名是 python-igraph；老的 "igraph" 容易装失败
