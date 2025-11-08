@@ -735,7 +735,7 @@ def protein_predict(adata, common_gene, common_protein, model_repo_url, pyg_data
         encoder_mRNA.load_state_dict(enc_state)
         decoder_protein.load_state_dict(dec_state)
     finally:
-
+        print("Model loading complete.")
 
     #
     # enc_state = load_state_from_hf(repo_id, encoder_ckpt, revision=revision, token=hf_token, device=device)
