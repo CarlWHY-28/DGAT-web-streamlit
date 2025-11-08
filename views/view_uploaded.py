@@ -315,13 +315,13 @@ g1, g2, g3 = st.columns(3)
 with g1:
     st.caption("Tissue image (adata_out)")
     fig1 = _plot_tissue_only(adata_out, lib_id_out if has_img_out else None, img_key_out if has_img_out else None)
-    st.pyplot(fig1, width="stretch")
+    st.pyplot(fig1, use_container_width=True)
     plt.close(fig1)
 
 with g2:
     st.caption("Spatial protein expression (imputed)")
     fig2 = _plot_spatial_expr(adata_out, gene, lib_id_out if has_img_out else None, img_key_out if has_img_out else None)
-    st.pyplot(fig2, width="stretch")
+    st.pyplot(fig2, use_container_width=True)
     plt.close(fig2)
 
 with g3:
@@ -330,5 +330,5 @@ with g3:
         fig3 = _plot_image_placeholder(IMAGE_NA_PATH)
     else:
         fig3 = _plot_spatial_expr(adata_in, gene, lib_id_in if has_img_in else None, img_key_in if has_img_in else None)
-    st.pyplot(fig3, width="stretch")
+    st.pyplot(fig3, use_container_width=True)
     plt.close(fig3)
