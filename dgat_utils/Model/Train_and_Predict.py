@@ -711,7 +711,7 @@ def protein_predict(adata, common_gene, common_protein, model_repo_url, pyg_data
 
     try:
         encoder_temp_path = download_to_temp_file(ENCODER_FILE_ID, suffix="_encoder.pth")
-        decoder_temp_path = download_to_temp_file(DECODER_FILE_ID, suffix="_decoder.pth")
+
 
         encoder_mRNA = GATEncoder(in_channels=len(common_gene), hidden_dim=hidden_dim, dropout=dropout_rate)
         print(f"Loading Encoder State: {encoder_temp_path}")
@@ -721,7 +721,7 @@ def protein_predict(adata, common_gene, common_protein, model_repo_url, pyg_data
             os.remove(encoder_temp_path)
             print(f"Temp file deleted: {encoder_temp_path}")
 
-
+        decoder_temp_path = download_to_temp_file(DECODER_FILE_ID, suffix="_decoder.pth")
         decoder_protein = Decoder_Protein(hidden_dim, common_protein)
         print(f"Loading Decoder State: {decoder_temp_path}")
         dec_state = torch.load(decoder_temp_path, map_location=device)
