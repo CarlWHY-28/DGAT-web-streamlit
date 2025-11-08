@@ -710,6 +710,16 @@ def protein_predict(adata, common_gene, common_protein, model_repo_url, pyg_data
     decoder_temp_path = None
 
     try:
+        decoder_temp_path = download_to_temp_file(DECODER_FILE_ID, suffix="_decoder.pth")
+        decoder_protein = Decoder_Protein(hidden_dim, common_protein)
+        print(f"Loading Decoder State: {decoder_temp_path}")
+        dec_state = torch.load(decoder_temp_path, map_location=device)
+
+        if decoder_temp_path and os.path.exists(decoder_temp_path):
+            os.remove(decoder_temp_path)
+            print(f"Temp file deleted: {decoder_temp_path}")
+
+
         encoder_temp_path = download_to_temp_file(ENCODER_FILE_ID, suffix="_encoder.pth")
 
 
@@ -721,14 +731,7 @@ def protein_predict(adata, common_gene, common_protein, model_repo_url, pyg_data
             os.remove(encoder_temp_path)
             print(f"Temp file deleted: {encoder_temp_path}")
 
-        decoder_temp_path = download_to_temp_file(DECODER_FILE_ID, suffix="_decoder.pth")
-        decoder_protein = Decoder_Protein(hidden_dim, common_protein)
-        print(f"Loading Decoder State: {decoder_temp_path}")
-        dec_state = torch.load(decoder_temp_path, map_location=device)
 
-        if decoder_temp_path and os.path.exists(decoder_temp_path):
-            os.remove(decoder_temp_path)
-            print(f"Temp file deleted: {decoder_temp_path}")
 
 
 
