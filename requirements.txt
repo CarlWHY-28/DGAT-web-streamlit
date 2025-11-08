@@ -1,7 +1,6 @@
 # ===== UI =====
-streamlit==1.41.1
-rich==14.2.0
-
+streamlit==1.38.0
+rich==13.9.4
 
 # ===== Numeric stack (Py3.11 稳定组合，并与 scanpy 1.11 兼容) =====
 numpy==1.25.2
