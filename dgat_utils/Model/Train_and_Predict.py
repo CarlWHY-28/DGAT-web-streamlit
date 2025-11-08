@@ -710,6 +710,19 @@ def protein_predict(adata, common_gene, common_protein, model_repo_url, pyg_data
     decoder_temp_path = None
 
     try:
+
+        encoder_temp_path = download_to_temp_file(ENCODER_FILE_ID, suffix="_encoder.pth")
+
+        encoder_mRNA = GATEncoder(in_channels=len(common_gene), hidden_dim=hidden_dim, dropout=dropout_rate)
+        print(f"Loading Encoder State: {encoder_temp_path}")
+        enc_state = torch.load(encoder_temp_path, map_location=device)
+        if encoder_temp_path and os.path.exists(encoder_temp_path):
+            os.remove(encoder_temp_path)
+            print(f"Temp file deleted: {encoder_temp_path}")
+        encoder_mRNA.load_state_dict(enc_state)
+
+
+
         decoder_temp_path = download_to_temp_file(DECODER_FILE_ID, suffix="_decoder.pth")
         decoder_protein = Decoder_Protein(hidden_dim, common_protein)
         print(f"Loading Decoder State: {decoder_temp_path}")
@@ -719,33 +732,9 @@ def protein_predict(adata, common_gene, common_protein, model_repo_url, pyg_data
             os.remove(decoder_temp_path)
             print(f"Temp file deleted: {decoder_temp_path}")
 
-
-        encoder_temp_path = download_to_temp_file(ENCODER_FILE_ID, suffix="_encoder.pth")
-
-
-        encoder_mRNA = GATEncoder(in_channels=len(common_gene), hidden_dim=hidden_dim, dropout=dropout_rate)
-        print(f"Loading Encoder State: {encoder_temp_path}")
-        enc_state = torch.load(encoder_temp_path, map_location=device)
-
-        if encoder_temp_path and os.path.exists(encoder_temp_path):
-            os.remove(encoder_temp_path)
-            print(f"Temp file deleted: {encoder_temp_path}")
-
-
-
-
-
-        encoder_mRNA.load_state_dict(enc_state)
         decoder_protein.load_state_dict(dec_state)
     finally:
         print("Model loading complete.")
-
-    #
-    # enc_state = load_state_from_hf(repo_id, encoder_ckpt, revision=revision, token=hf_token, device=device)
-    # dec_state = load_state_from_hf(repo_id, decoder_ckpt, revision=revision, token=hf_token, device=device)
-
-    encoder_mRNA.load_state_dict(enc_state)
-    decoder_protein.load_state_dict(dec_state)
 
     encoder_mRNA.eval()
     decoder_protein.eval()
