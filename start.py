@@ -15,16 +15,8 @@ st.set_page_config(
         page_icon= "./logo/gbm_ribbon.png",
         initial_sidebar_state="expanded",
 )
-
-# max_width_str = f"max-width: {80}%;"
-
-# st.markdown(f"""
-#         <style>
-#         .appview-container .main .block-container{{{max_width_str}}}
-#         </style>
-#         """,
-#         unsafe_allow_html=True,
-#     )
+if "has_upload" not in st.session_state:
+    st.session_state["has_upload"] = False
 
 define_layout(max_width='80%', padding_top='2rem', padding_right='0rem', padding_left='0rem', padding_bottom='0rem')
 
@@ -37,48 +29,18 @@ df_sample = get_sample_dataframe('./data/dataset.csv')
 st.session_state['df_sample'] = df_sample
 persist("sample_id")
 
-emoji = "🔹" #"🔸" #"💠" #"🔹" # # #
+emoji = "🔹"  # "🔸" "💠" ...
 
 home_page = st.Page(
     page = "views/home.py",
     title = "Home",
-    icon = emoji,   #":material/chevron_right:"  ,
+    icon = emoji,
     default= True,
 )
 
 datasets_page = st.Page(
     page = "views/dataset.py",
     title = "Dataset Explorer",
-    icon = emoji
-)
-
-metaprogram_page = st.Page(
-    page = "views/metaprogram.py",
-    title = "Metaprogram Maps",
-    icon = emoji   
-)
-
-metaprogram_feature_page = st.Page(
-    page = "views/metaprogram_feature.py",
-    title = "Metaprogram-Associated Features",
-    icon = emoji 
-)
-
-mp_specific_page = st.Page(
-    page = "views/metaprogram_centric.py",
-    title = "Metaprogram-Centric Comparison",  #Metaprogram
-    icon = emoji  
-)
-
-drug2cell_page = st.Page(
-    page = "views/drug2cell.py",
-    title = "Drug2Cell Score Maps",
-    icon = emoji
-)
-
-heatmap_gene_correlation_page = st.Page(
-    page = "views/Ligand–Receptor–Pathway–TF_Correlation.py",
-    title = "L-R-Pathway-TF-Drug Correlation Heatmap",  #Correlation heatmaps
     icon = emoji
 )
 
@@ -100,7 +62,6 @@ s_pathway_page = st.Page(
     icon = emoji
 )
 
-
 contact_page = st.Page(
     page = "views/contact.py",
     title = "Contact us",
@@ -119,27 +80,26 @@ upload_page = st.Page(
     icon = emoji
 )
 
-
-# -- NAVIGATION --
-
-pg = st.navigation(
-    {
-        "": [home_page, datasets_page],
-        "Analysis of Individual Samples": [metaprogram_page, metaprogram_feature_page, gene_page, s_tf_page, s_pathway_page , drug2cell_page],  # ligand_page,
-        "Comparison Across Samples": [mp_specific_page,  heatmap_gene_correlation_page], 
-        "Resources": [citation_page, contact_page],
-        "Upload Your Data": [upload_page],
-    }
+view_uploaded_page = st.Page(
+    page = "views/view_uploaded.py",
+    title = "View your data",
+    icon = emoji
 )
 
+# -- NAVIGATION --
+nav_groups = {
+    "": [home_page, datasets_page],
+    "Upload Your Data": [upload_page],  # Upload
+   # "Analysis of Individual Samples": [gene_page, s_tf_page, s_pathway_page],
+    #"Comparison Across Samples": [],
+    "Resources": [citation_page, contact_page]
+
+}
+if st.session_state.get("has_upload", False):
+    nav_groups["Upload Your Data"].append(view_uploaded_page)
+
+pg = st.navigation(nav_groups)
 pg.run()
 
-# -- SHARED ON ALL PAGES --
-# st.sidebar.text("Made by Osmanbeyoglu Lab")
-
-# -- RUN NAVIGATION --
-# pg.run()
 st.divider()
-st.markdown(footer,unsafe_allow_html=True) 
-
-
+st.markdown(footer, unsafe_allow_html=True)
