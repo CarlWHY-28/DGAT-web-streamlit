@@ -7,11 +7,15 @@ import scanpy as sc
 import tempfile
 import os
 from typing import Optional, Tuple, List, Dict, Any
+import sys
+import psutil
 
 try:
     from scipy import sparse as sp
 except Exception:
     sp = None
+
+
 
 FIGSIZE = (4.8, 4.8)
 
@@ -38,7 +42,7 @@ with c2:
             tmp_path = tmp.name
         with open(tmp_path, "rb") as f:
             st.download_button(
-                label="⬇️ Download adata_out (.h5ad)",
+                label="⬇️ Download predicted data (.h5ad)",
                 data=f.read(),
                 file_name="adata_out.h5ad",
                 mime="application/octet-stream"
@@ -332,3 +336,9 @@ with g3:
         fig3 = _plot_spatial_expr(adata_in, gene, lib_id_in if has_img_in else None, img_key_in if has_img_in else None)
     st.pyplot(fig3, use_container_width=True)
     plt.close(fig3)
+#
+#
+# process = psutil.Process(os.getpid())
+# mem_info = process.memory_info()
+# print(f"RSS (常驻内存): {mem_info.rss / 1024**2:.2f} MB")
+# print(f"VMS (虚拟内存): {mem_info.vms / 1024**2:.2f} MB")

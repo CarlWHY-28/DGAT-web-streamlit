@@ -91,7 +91,7 @@ if submit_button:
         st.warning("Please select an `.h5ad` file before submitting.")
 
 if st.session_state.get("results_ready", False):
-    st.info("Your results are available under **Upload Your Data → View your data** in the left sidebar. You might also download the imputed data there. Uploading a new file will overwrite the previous results. Please do not refresh this page to avoid losing the imputed data.", icon="ℹ️")
+    st.info("Your results are available under **Upload Your Data → View your data** in the left sidebar. You might download the imputed data there. Uploading a new file will overwrite the previous results. Please do not refresh this page to avoid losing the imputed data.", icon="ℹ️")
     col1, col2 = st.columns([1, 3])
     with col1:
         open_now = st.button("Open results page", type="primary", use_container_width=True)

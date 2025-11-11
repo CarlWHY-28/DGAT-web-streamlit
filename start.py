@@ -7,8 +7,11 @@ from style import define_layout
 # st.cache_data.clear()
 # st.cache_resource.clear()
 
-
+import time, os, psutil
 # --- PAGE SETUP ----
+process = psutil.Process(os.getpid())
+
+
 
 st.set_page_config(
         page_title='DGAT',
@@ -103,3 +106,7 @@ pg.run()
 
 st.divider()
 st.markdown(footer, unsafe_allow_html=True)
+
+while True:
+    print(f"Memory: {process.memory_info().rss / 1024**2:.2f} MB", end="\r")
+    time.sleep(1)
