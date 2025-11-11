@@ -329,5 +329,3 @@ with g3:
 #
 # process = psutil.Process(os.getpid())
 # mem_info = process.memory_info()
-# print(f"RSS (常驻内存): {mem_info.rss / 1024**2:.2f} MB")
-# print(f"VMS (虚拟内存): {mem_info.vms / 1024**2:.2f} MB")
