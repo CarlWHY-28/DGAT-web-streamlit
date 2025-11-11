@@ -99,7 +99,7 @@ nav_groups = {
 
 }
 if st.session_state.get("has_upload", False):
-    nav_groups["Upload Your Data"].append(view_uploaded_page)
+    nav_groups["Impute Your Data"].append(view_uploaded_page)
 
 pg = st.navigation(nav_groups)
 pg.run()
