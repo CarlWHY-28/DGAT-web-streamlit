@@ -106,7 +106,7 @@ pg.run()
 
 st.divider()
 st.markdown(footer, unsafe_allow_html=True)
-
-while True:
-    print(f"Memory: {process.memory_info().rss / 1024**2:.2f} MB", end="\r")
-    time.sleep(1)
+#
+# while True:
+#     print(f"Memory: {process.memory_info().rss / 1024**2:.2f} MB", end="\r")
+#     time.sleep(1)
