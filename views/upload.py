@@ -115,7 +115,7 @@ with tab1:
         This page is used to upload your spatial transcriptomics data (in `h5ad` format) for protein imputation.
 
         **Q2: What information do I need to provide?**  
-        Only an `.h5ad` file is required. No personal information is needed.
+        Only an `.h5ad` file is required. No personal information is needed. We will not store your data beyond the session so feel free to upload sensitive data.
 
         **Q3: How long does the upload and processing take?**  
         It depends on your file size and Internet speed. Please keep this tab open during processing. Normally, it takes 3~5 minutes for files under 300MB.

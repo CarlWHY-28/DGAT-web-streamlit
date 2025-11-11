@@ -20,10 +20,10 @@ st.write("")
 
 # st.markdown('➡️ Read our paper here: https://www.google.com')   
 
-desc1 = "Spatial Transcriptomics (ST) technologies have revolutionized our understanding of the tumor microenvironment (TME) by enabling the mapping of gene expression within the spatial context of tissues. However, mRNA levels do not always correlate with protein abundance, which is crucial for understanding cellular functions and interactions. To address this gap, we developed DGAT (Dual-Graph Attention Network), a novel computational framework that integrates gene profiles and spatial information to predict protein expression from ST data."
-desc2 = "In this study, we applied DGAT to publicly available ST datasets and additionally generated analysis based on predicted protein profiles."
+#desc1 = "Spatial Transcriptomics (ST) technologies have revolutionized our understanding of the tumor microenvironment (TME) by enabling the mapping of gene expression within the spatial context of tissues. However, mRNA levels do not always correlate with protein abundance, which is crucial for understanding cellular functions and interactions. To address this gap, we developed DGAT (Dual-Graph Attention Network), a novel computational framework that integrates gene profiles and spatial information to predict protein expression from ST data."
+desc2 = "This is a user-friendly web application for DGAT imputation, allowing researchers to upload their spatial transcriptomics datasets and obtain predicted protein expression profiles. Visualization previews of predicted protein landscapes are also available within the app."
 
-st.markdown(f"<p style='text-align: justify; color: black; font-size:18px'>{desc1}</p>", unsafe_allow_html=True) 
+#st.markdown(f"<p style='text-align: justify; color: black; font-size:18px'>{desc1}</p>", unsafe_allow_html=True)
 st.markdown(f"<p style='text-align: justify; color: black; font-size:18px'>{desc2}</p>", unsafe_allow_html=True) 
 
 st.markdown('📚 Read our preprint here! [DGAT: A Dual-Graph Attention Network for Inferring Spatial Protein Landscapes from Transcriptomics](https://www.biorxiv.org/content/10.1101/2025.07.05.662121v1)')
