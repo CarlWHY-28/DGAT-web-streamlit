@@ -2,7 +2,6 @@
 streamlit==1.38.0
 rich==13.9.4
 
-# ===== Numeric stack (Py3.11 稳定组合，并与 scanpy 1.11 兼容) =====
 numpy==1.25.2
 scipy==1.13.1
 pandas==2.2.2
@@ -13,7 +12,6 @@ pillow==10.4.0
 # ===== AnnData / Scanpy =====
 anndata==0.11.3
 scanpy==1.11.2
-# 如无需 muon，可先不装；需要的话放开下一行
 # muon==0.1.7
 
 # ===== ML / sklearn =====
@@ -27,8 +25,7 @@ torch_geometric==2.5.3
 torch_scatter==2.1.2
 torch_sparse==0.6.18
 pyg_lib==0.4.0
-# ===== Graph / community detection（可选）=====
-# 注意：pypi 上真实包名是 python-igraph；老的 "igraph" 容易装失败
+
 python-igraph==0.11.5
 leidenalg==0.10.2
 
