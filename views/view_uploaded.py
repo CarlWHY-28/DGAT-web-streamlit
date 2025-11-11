@@ -21,7 +21,7 @@ FIGSIZE = (4.8, 4.8)
 
 IMAGE_NA_PATH = "./logo/no_available_icon.png"
 
-st.markdown("<h2 style='text-align: center; color: black;'>View your uploaded result</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; color: black;'>View your imputed result</h2>", unsafe_allow_html=True)
 st.write("")
 
 adata_in = st.session_state.get("adata_in", None)
@@ -34,7 +34,7 @@ if (adata_in is None) or (adata_out is None):
 
 c1, c2 = st.columns([3, 1])
 with c1:
-    st.subheader('Sample name: "Uploaded data"')
+    st.subheader('Protein imputed data preview')
 with c2:
     try:
         with tempfile.NamedTemporaryFile(suffix=".h5ad", delete=False) as tmp:
@@ -177,22 +177,9 @@ def _plot_image_placeholder(img_path: str) -> plt.Figure:
 
 
 def _plot_tissue_only(adata, library_id: Optional[str], img_key: Optional[str]) -> plt.Figure:
-    #
-    # if library_id and img_key:
-    #     try:
-    #         img = adata.uns["spatial"][library_id]["images"][img_key]
-    #         if img is not None and hasattr(img, 'shape'):
-    #             fig, ax = plt.subplots(figsize=FIGSIZE)
-    #             ax.imshow(img)
-    #             ax.axis("off")
-    #             plt.tight_layout()
-    #             return fig
-    #     except Exception as e:
-    #         pass
-
-    if library_id and img_key:
-        try:
-            fig, ax = plt.subplots(figsize=FIGSIZE)
+    fig, ax = plt.subplots(figsize=FIGSIZE, dpi=100)
+    try:
+        if library_id and img_key:
             sc.pl.spatial(
                 adata,
                 color=None,
@@ -201,36 +188,33 @@ def _plot_tissue_only(adata, library_id: Optional[str], img_key: Optional[str]) 
                 show=False,
                 ax=ax
             )
-            return fig
-        except Exception:
-            plt.close(fig)
-
-    try:
-        fig, ax = plt.subplots(figsize=FIGSIZE)
-        sc.pl.spatial(
-            adata,
-            color=None,
-            show=False,
-            ax=ax
-        )
+        else:
+            sc.pl.spatial(adata, color=None, show=False, ax=ax)
+        ax.set_xlim(ax.get_xlim())
+        ax.set_ylim(ax.get_ylim())
+        ax.set_aspect('equal', adjustable='box')
+        plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
         return fig
     except Exception:
         plt.close(fig)
 
-    fig, ax = plt.subplots(figsize=FIGSIZE)
+    # fallback: NA
+    fig, ax = plt.subplots(figsize=FIGSIZE, dpi=100)
     ax.axis("off")
     ax.text(0.5, 0.5, "No tissue image", ha="center", va="center", fontsize=14, transform=ax.transAxes)
     return fig
 
 
-def _plot_spatial_expr(adata, gene: Optional[str], library_id: Optional[str], img_key: Optional[str]) -> plt.Figure:
 
+def _plot_spatial_expr(adata, gene: Optional[str], library_id: Optional[str], img_key: Optional[str]) -> plt.Figure:
+    fig, ax = plt.subplots(figsize=FIGSIZE, dpi=100)
     if gene is None or str(gene) not in _varnames(adata):
-        return _plot_scatter_expr(adata, gene)
+        ax.axis("off")
+        ax.text(0.5, 0.5, "NA", ha="center", va="center", fontsize=16, transform=ax.transAxes)
+        return fig
 
     if library_id and img_key:
         try:
-            fig, ax = plt.subplots(figsize=FIGSIZE)
             sc.pl.spatial(
                 adata,
                 color=str(gene),
@@ -238,13 +222,18 @@ def _plot_spatial_expr(adata, gene: Optional[str], library_id: Optional[str], im
                 img_key=img_key,
                 show=False,
                 ax=ax,
-                size = 1.7
+                size=1.7
             )
+            ax.set_xlim(ax.get_xlim())
+            ax.set_ylim(ax.get_ylim())
+            ax.set_aspect('equal', adjustable='box')
+            plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
             return fig
         except Exception:
             plt.close(fig)
 
     return _plot_scatter_expr(adata, gene)
+
 
 
 has_img_out, lib_id_out, img_key_out, spatial_meta_out = _probe_spatial_meta(adata_out)
