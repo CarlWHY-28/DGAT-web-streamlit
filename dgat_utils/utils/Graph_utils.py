@@ -190,7 +190,5 @@ class MultiGraphDataset_for_no_protein(Dataset):
         return self.data_list[idx]
 
 
-processed_data_dir = '/ix/hosmanbeyoglu/haw309/new_pyg_data'
-
 
 
