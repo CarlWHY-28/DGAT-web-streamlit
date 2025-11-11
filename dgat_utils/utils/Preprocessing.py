@@ -213,7 +213,7 @@ def preprocess_ST(adata):
     Quality control and normalization for spatial transcriptomics data. Due to we selected common genes for the training data, we do not filter genes here.
     :param adata: the AnnData object containing spatial transcriptomics data.
     """
-    sc.pp.filter_cells(adata, min_genes=700)
+    #sc.pp.filter_cells(adata, min_genes=700)
     sc.pp.normalize_total(adata, target_sum=1e4)
     sc.pp.log1p(adata)
     sc.pp.scale(adata, max_value=10)
