@@ -92,7 +92,7 @@ view_uploaded_page = st.Page(
 # -- NAVIGATION --
 nav_groups = {
     "": [home_page, datasets_page],
-    "Upload Your Data": [upload_page],  # Upload
+    "Impute Your Data": [upload_page],  # Upload
    # "Analysis of Individual Samples": [gene_page, s_tf_page, s_pathway_page],
     #"Comparison Across Samples": [],
     "Resources": [citation_page, contact_page]
