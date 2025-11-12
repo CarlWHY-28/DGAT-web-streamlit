@@ -294,7 +294,7 @@ if st.button("Send Message"):
         st.warning("⚠️ Please fill in all required fields.")
     else:
         # Create mailto link
-        to_email = "osmanbeyogluhu@pitt.edu"
+        to_email = "xim33@pitt.edu"
         email_subject = quote(subject or "Contact Form Submission")
         email_body = quote(f"Name: {name}\nEmail: {email}\n\n{message}")
         mailto_link = f"mailto:{to_email}?subject={email_subject}&body={email_body}"
