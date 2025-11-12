@@ -175,6 +175,3 @@ with tab2:
       *(to ensure smooth and reliable upload performance.)*
     """)
 
-
-img = "./logo/under_construction.jpg"
-st.image(img)
