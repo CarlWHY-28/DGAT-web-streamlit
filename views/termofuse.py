@@ -22,7 +22,7 @@ bioRxiv 2025.07.05.662121; doi: https://doi.org/10.1101/2025.07.05.662121
 
 
 st.markdown("""
-<div style="border:1px solid #ccc; padding:1em; border-radius:8px; background-color:#fafafa;">
+# <div style="border:1px solid #ccc; padding:1em; border-radius:8px; background-color:#fafafa;">
 <h4>⚠️ Terms of Use for <b>DGAT</b></h4>
 <ul>
 <li><b>Research Only:</b> DGAT is provided for non-commercial, academic research use.</li>
@@ -33,6 +33,6 @@ st.markdown("""
 <p style="background-color:#fff59d;"><i>Haoyu Wang, Brittany A Cody, Hatice Ulku Osmanbeyoglu.</i>  “DGAT: A Dual-Graph Attention Network for Spatially Resolved Protein Imputation from Transcriptomic Data,” <i>bioRxiv 2025.07.05.662121; doi: https://doi.org/10.1101/2025.07.05.662121.</p>
 <li><b>Commercial Use:</b> Contact the DGAT team for licensing options.</li>
 </ul>
-</div>
+# </div>
 """, unsafe_allow_html=True)
 
