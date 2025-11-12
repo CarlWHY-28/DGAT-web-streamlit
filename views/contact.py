@@ -25,118 +25,118 @@ b.markdown("""<div style="position:relative;padding-bottom:100%;">
 
 
 
-# st.markdown(
-#     """
-#     <style>
-#       .contact-form {
-#         max-width: 600px;
-#         margin: auto;
-#         padding: 30px;
-#         background-color: #f9f9f9;
-#         border-radius: 8px;
-#         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-#       }
-#       .contact-form h1 {
-#         font-size: 32px;
-#         margin-bottom: 10px;
-#       }
-#       .contact-form p {
-#         font-size: 16px;
-#         color: #555;
-#         margin-bottom: 20px;
-#       }
-#       .contact-form input, .contact-form textarea {
-#         width: 100%;
-#         padding: 12px;
-#         margin-bottom: 15px;
-#         border: 1px solid #ccc;
-#         border-radius: 4px;
-#         font-size: 14px;
-#       }
-#       .contact-form textarea {
-#         height: 150px;
-#         resize: vertical;
-#       }
-#       .contact-form button {
-#         background-color: #0066cc;
-#         color: white;
-#         border: none;
-#         padding: 14px 20px;
-#         font-size: 16px;
-#         border-radius: 4px;
-#         cursor: pointer;
-#       }
-#       .contact-form button:hover {
-#         background-color: #005bb5;
-#       }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
+st.markdown(
+    """
+    <style>
+      .contact-form {
+        max-width: 600px;
+        margin: auto;
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+      .contact-form h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+      .contact-form p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 20px;
+      }
+      .contact-form input, .contact-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .contact-form textarea {
+        height: 150px;
+        resize: vertical;
+      }
+      .contact-form button {
+        background-color: #0066cc;
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .contact-form button:hover {
+        background-color: #005bb5;
+      }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# # content
-# st.markdown('<div class="contact-form">', unsafe_allow_html=True)
-# st.markdown("<h1>Contact Us</h1>", unsafe_allow_html=True)
-# st.markdown("<p>We’re here to help. Send us a message and we'll get back to you asap.</p>", unsafe_allow_html=True)
+# content
+st.markdown('<div class="contact-form">', unsafe_allow_html=True)
+st.markdown("<h1>Contact Us</h1>", unsafe_allow_html=True)
+st.markdown("<p>We’re here to help. Send us a message and we'll get back to you asap.</p>", unsafe_allow_html=True)
 
-# name = st.text_input("Name *", placeholder="Your full name")
-# email = st.text_input("Email *", placeholder="haw309@pitt.edu")
-# subject = st.text_input("Subject", placeholder="What’s this about?")
-# message = st.text_area("Message *", placeholder="Write your message here…")
+name = st.text_input("Name *", placeholder="Your full name")
+email = st.text_input("Email *", placeholder="haw309@pitt.edu")
+subject = st.text_input("Subject", placeholder="What’s this about?")
+message = st.text_area("Message *", placeholder="Write your message here…")
 
-# if st.button("Send Message"):
-#     # handle submission (e.g., send email or store in DB)
-#     st.info("Thanks for reaching out! We’ll be in touch soon.")
-#     # optionally clear inputs or redirect
+if st.button("Send Message"):
+    # handle submission (e.g., send email or store in DB)
+    st.info("Thanks for reaching out! We’ll be in touch soon.")
+    # optionally clear inputs or redirect
 
-# st.markdown("</div>", unsafe_allow_html=True)
+st.markdown("</div>", unsafe_allow_html=True)
 
-# # Additional contact info
-# st.markdown("---")
-# st.markdown("**Address:** 5607 Baum Blvd, Pittsburgh PA, 15215")  
-# # st.markdown("**Phone:** (123) 456-7890")  
-# # st.markdown("**Email:** support@yourdomain.com")
-# st.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
-# st.markdown("""<span style="font-size:16px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
+# Additional contact info
+st.markdown("---")
+st.markdown("**Address:** 5607 Baum Blvd, Pittsburgh PA, 15215")  
+# st.markdown("**Phone:** (123) 456-7890")  
+# st.markdown("**Email:** support@yourdomain.com")
+st.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
+st.markdown("""<span style="font-size:16px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
 
 
-# import requests
-# # import streamlit as st
+import requests
+# import streamlit as st
 
-# SENDGRID_API_KEY = st.secrets["SENDGRID_API_KEY"]
+SENDGRID_API_KEY = st.secrets["SENDGRID_API_KEY"]
 
-# def send_email_via_sendgrid(name, email, message):
-#     url = "https://api.sendgrid.com/v3/mail/send"
-#     headers = {
-#         "Authorization": f"Bearer {SENDGRID_API_KEY}",
-#         "Content-Type": "application/json"
-#     }
-#     data = {
-#         "personalizations": [{
-#             "to": [{"email": "your_email@domain.com"}],
-#             "subject": f"New contact form message from {name}"
-#         }],
-#         "from": {"email": "no-reply@yourdomain.com"},
-#         "content": [{
-#             "type": "text/plain",
-#             "value": f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
-#         }]
-#     }
-#     r = requests.post(url, headers=headers, json=data)
-#     return r.status_code
+def send_email_via_sendgrid(name, email, message):
+    url = "https://api.sendgrid.com/v3/mail/send"
+    headers = {
+        "Authorization": f"Bearer {SENDGRID_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "personalizations": [{
+            "to": [{"email": "your_email@domain.com"}],
+            "subject": f"New contact form message from {name}"
+        }],
+        "from": {"email": "no-reply@yourdomain.com"},
+        "content": [{
+            "type": "text/plain",
+            "value": f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+        }]
+    }
+    r = requests.post(url, headers=headers, json=data)
+    return r.status_code
 
-# st.title("Contact Us")
+st.title("Contact Us")
 
-# name = st.text_input("Name *")
-# email = st.text_input("Email *")
-# message = st.text_area("Message *")
+name = st.text_input("Name *")
+email = st.text_input("Email *")
+message = st.text_area("Message *")
 
-# if st.button("Send Message"):
-#     if not name or not email or not message:
-#         st.warning("Please fill in all fields.")
-#     else:
-#         status = send_email_via_sendgrid(name, email, message)
-#         if status == 202:
-#             st.success("✅ Message sent successfully!")
-#         else:
-#             st.error(f"❌ Error sending email (code {status})")
+if st.button("Send Message"):
+    if not name or not email or not message:
+        st.warning("Please fill in all fields.")
+    else:
+        status = send_email_via_sendgrid(name, email, message)
+        if status == 202:
+            st.success("✅ Message sent successfully!")
+        else:
+            st.error(f"❌ Error sending email (code {status})")
