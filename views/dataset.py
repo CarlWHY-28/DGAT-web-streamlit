@@ -51,6 +51,6 @@ for i in range(len(df_sample)):
 
 
 
-c1,c2,c3 =  st.columns[1,3,1]
+c1, c2, c3 =  st.columns([1,3,1])
 img = "./logo/under_construction.png"
 c2.image(img)
