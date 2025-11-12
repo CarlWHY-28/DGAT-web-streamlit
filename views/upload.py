@@ -140,19 +140,19 @@ with tab2:
 
 
     st.markdown("""
-    ### 🧭 **Dataset Preparation Guide for DGATviz**
+    #### 🧭 **Dataset Preparation Guide for DGATviz**
     
     To ensure successful processing and visualization, please prepare your dataset in the following format and structure **before uploading** to DGATviz.
     
     ---
     
-    #### 1️⃣ **File Format**
+    ##### 1️⃣ **File Format**
     
     - The input file must be in **`.h5ad` (AnnData)** format.
     
     ---
     
-    #### 2️⃣ **Required Data Components**
+    ##### 2️⃣ **Required Data Components**
     
     - **`adata.X`** — Raw count matrix  
       *(Preferably non-normalized; preprocessing and normalization are handled automatically by the DGAT pipeline.)*
@@ -169,7 +169,7 @@ with tab2:
     
     ---
     
-    #### 3️⃣ **File Size Limit**
+    ##### 3️⃣ **File Size Limit**
     
     - **Recommended maximum file size:** ≤ **200 MB**  
       *(to ensure smooth and reliable upload performance.)*
