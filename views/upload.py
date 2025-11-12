@@ -174,3 +174,7 @@ with tab2:
     - **Recommended maximum file size:** ≤ **200 MB**  
       *(to ensure smooth and reliable upload performance.)*
     """)
+
+
+img = "./logo/under_construction.jpg"
+st.image(img)
