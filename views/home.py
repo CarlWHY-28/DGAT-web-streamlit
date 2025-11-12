@@ -37,10 +37,3 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# st.markdown(' Read our paper from here 👉 https://aacrjournals.org/cancerrescommun/article/4/8/2133/747011/Spatial-Landscape-of-Malignant-Pleural-and')    
-import streamlit as st
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-
-SENDGRID_API_KEY = st.secrets["SENDGRID_API_KEY"]
-sg = SendGridAPIClient(SENDGRID_API_KEY)
