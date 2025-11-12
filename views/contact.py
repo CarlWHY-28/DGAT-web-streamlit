@@ -19,7 +19,7 @@ a.markdown("""<span style="font-size:16px;">Haoyu Wang<br>PhD Student<br>✉️ 
 b.markdown("""<div style="position:relative;padding-bottom:100%;">
                 <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;"
                 frameborder="0" width="100%" height="100%" allowfullscreen allow="autoplay" 
-               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=5051%20Centre%20Avenue%20Pittsburgh,%20PA%2015213+(My%20Business%20Name)&amp;t=p&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=5067%20CBaum%20Blvd%20Pittsburgh,%20PA%2015206+(My%20Business%20Name)&amp;t=p&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
                 <a href="https://www.maps.ie/distance-area-calculator.html">measure distance on map</a></iframe></div>""", unsafe_allow_html=True)
     
 st.markdown("#")
