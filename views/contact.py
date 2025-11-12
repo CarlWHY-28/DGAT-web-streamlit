@@ -105,3 +105,45 @@ st.markdown("**Address:** 5607 Baum Blvd, Pittsburgh PA, 15215")
 # st.markdown("**Email:** support@yourdomain.com")
 st.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
 st.markdown("""<span style="font-size:16px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
+
+
+import requests
+# import streamlit as st
+
+SENDGRID_API_KEY = st.secrets["SENDGRID_API_KEY"]
+
+def send_email_via_sendgrid(name, email, message):
+    url = "https://api.sendgrid.com/v3/mail/send"
+    headers = {
+        "Authorization": f"Bearer {SENDGRID_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "personalizations": [{
+            "to": [{"email": "your_email@domain.com"}],
+            "subject": f"New contact form message from {name}"
+        }],
+        "from": {"email": "no-reply@yourdomain.com"},
+        "content": [{
+            "type": "text/plain",
+            "value": f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+        }]
+    }
+    r = requests.post(url, headers=headers, json=data)
+    return r.status_code
+
+st.title("Contact Us")
+
+name = st.text_input("Name *")
+email = st.text_input("Email *")
+message = st.text_area("Message *")
+
+if st.button("Send Message"):
+    if not name or not email or not message:
+        st.warning("Please fill in all fields.")
+    else:
+        status = send_email_via_sendgrid(name, email, message)
+        if status == 202:
+            st.success("✅ Message sent successfully!")
+        else:
+            st.error(f"❌ Error sending email (code {status})")
