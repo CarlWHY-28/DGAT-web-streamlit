@@ -1,32 +1,32 @@
-# import streamlit as st
-
-
-# a, b = st.columns([1, 1.6 ])
-
-# a.write("")
-# a.write("")
-# a.write("")
-# a.write("")
-# a.write("")
-# a.write("")
-# a.write("")
-# a.subheader("Please contact:")
-
-# a.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
-# a.markdown("""<span style="font-size:16px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
-# # b.image('https://wexfordscitech.com/wp-content/uploads/2021/03/Assembly-web-5.png')
-# # b.markdown("""<span style="font-size:18px;">University of Pittsburgh, UPMC Hillman Cancer Center, Assembly Building</span>""", unsafe_allow_html=True)
-# b.markdown("""<div style="position:relative;padding-bottom:100%;">
-#                 <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;"
-#                 frameborder="0" width="100%" height="100%" allowfullscreen allow="autoplay" 
-#                src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=5051%20Centre%20Avenue%20Pittsburgh,%20PA%2015213+(My%20Business%20Name)&amp;t=p&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
-#                 <a href="https://www.maps.ie/distance-area-calculator.html">measure distance on map</a></iframe></div>""", unsafe_allow_html=True)
-    
-# st.markdown("#")
-
-
-
 import streamlit as st
+
+
+a, b = st.columns([1, 1.6 ])
+
+a.write("")
+a.write("")
+a.write("")
+a.write("")
+a.write("")
+a.write("")
+a.write("")
+a.subheader("Please contact:")
+
+a.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
+a.markdown("""<span style="font-size:16px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
+# b.image('https://wexfordscitech.com/wp-content/uploads/2021/03/Assembly-web-5.png')
+# b.markdown("""<span style="font-size:18px;">University of Pittsburgh, UPMC Hillman Cancer Center, Assembly Building</span>""", unsafe_allow_html=True)
+b.markdown("""<div style="position:relative;padding-bottom:100%;">
+                <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;"
+                frameborder="0" width="100%" height="100%" allowfullscreen allow="autoplay" 
+               src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=5051%20Centre%20Avenue%20Pittsburgh,%20PA%2015213+(My%20Business%20Name)&amp;t=p&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                <a href="https://www.maps.ie/distance-area-calculator.html">measure distance on map</a></iframe></div>""", unsafe_allow_html=True)
+    
+st.markdown("#")
+
+
+
+# import streamlit as st
 
 # page config
 # st.set_page_config(page_title="Contact Us", layout="centered")
@@ -84,7 +84,7 @@ st.markdown(
 # content
 st.markdown('<div class="contact-form">', unsafe_allow_html=True)
 st.markdown("<h1>Contact Us</h1>", unsafe_allow_html=True)
-st.markdown("<p>We’re here to help. Send us a message and we'll get back to you within 24 hours.</p>", unsafe_allow_html=True)
+st.markdown("<p>We’re here to help. Send us a message and we'll get back to you asap.</p>", unsafe_allow_html=True)
 
 name = st.text_input("Name *", placeholder="Your full name")
 email = st.text_input("Email *", placeholder="you@example.com")
@@ -100,6 +100,8 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 # Additional contact info
 st.markdown("---")
-st.markdown("**Address:** 123 Main St, YourCity, YourState")  
-st.markdown("**Phone:** (123) 456-7890")  
-st.markdown("**Email:** support@yourdomain.com")
+st.markdown("**Address:** 5607 Baum Blvd, Pittsburgh PA, 15215")  
+# st.markdown("**Phone:** (123) 456-7890")  
+# st.markdown("**Email:** support@yourdomain.com")
+st.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
+st.markdown("""<span style="font-size:16px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
