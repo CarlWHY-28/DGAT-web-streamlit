@@ -3,6 +3,14 @@ import streamlit as st
 
 a, b = st.columns([1, 1.6 ])
 
+a.write("")
+a.write("")
+a.write("")
+a.write("")
+a.write("")
+a.write("")
+a.write("")
+
 
 a.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
 a.markdown("""<span style="font-size:18px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
