@@ -33,7 +33,7 @@ st.markdown(f"<p style='text-align: justify; color: black; font-size:18px'>{desc
 
 st.write("")
 st.markdown(
-    '📚 <span style="color:brown;">Read our preprint here!</span> [DGAT: A Dual-Graph Attention Network for Inferring Spatial Protein Landscapes from Transcriptomics](https://www.biorxiv.org/content/10.1101/2025.07.05.662121v1)',
+    '📚 <span style="color:brown;">Read our preprint here!</span> <br> [DGAT: A Dual-Graph Attention Network for Inferring Spatial Protein Landscapes from Transcriptomics](https://www.biorxiv.org/content/10.1101/2025.07.05.662121v1)',
     unsafe_allow_html=True
 )
 
