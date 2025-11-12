@@ -8,7 +8,6 @@ a.write("")
 a.write("")
 a.write("")
 a.write("")
-
 a.write("")
 a.subheader("Please contact:")
 a.write("")
