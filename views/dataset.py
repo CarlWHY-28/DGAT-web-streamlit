@@ -48,3 +48,9 @@ for i in range(len(df_sample)):
     if a.button("Analysis", i):
         update_widget_state('sample_id', sample_list[i])
         st.switch_page("views/metaprogram.py")
+
+
+
+
+img = "./logo/under_construction.jpg"
+st.image(img)
