@@ -23,7 +23,7 @@ bioRxiv 2025.07.05.662121; doi: https://doi.org/10.1101/2025.07.05.662121
 
 st.markdown("""
 # <div style="border:1px solid #ccc; padding:1em; border-radius:8px; background-color:#fafafa;">
-<h4>⚠️ Terms of Use for <b>DGAT</b></h4>
+<h4>DGAT Web Server – Terms of Use <b>DGAT</b></h4>
 <ul>
 <li><b>Research Only:</b> DGAT is provided for non-commercial, academic research use.</li>
 <li><b>At Your Own Risk:</b> Use is at your own risk; the developers and affiliated institutions are not liable for any loss or damage.</li>
