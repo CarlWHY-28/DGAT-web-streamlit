@@ -31,8 +31,6 @@ import requests
 
 # Check if SendGrid is configured
 try:
-    SENDGRID_API_KEY = "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"
-
     SENDGRID_API_KEY = st.secrets["SENDGRID_API_KEY"]
     email_configured = True
 except KeyError:
