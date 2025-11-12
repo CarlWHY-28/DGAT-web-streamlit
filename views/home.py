@@ -9,7 +9,7 @@ import streamlit as st
 img = "./images/DGAT_Training.png"
 
 
-st.markdown("<h2 style='text-align: center;  color: black;'>DGAT: A Dual-Graph Attention Network for Inferring Spatial Protein Landscapes from Transcriptomics", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center;  color: black;'>DGATviz: Interactive Visualization of Spatially Imputed Protein Expression", unsafe_allow_html=True)
 
 st.write("")
 
