@@ -52,5 +52,5 @@ for i in range(len(df_sample)):
 
 
 
-img = "./logo/under_construction.jpg"
+img = "./logo/under_construction.png"
 st.image(img)
