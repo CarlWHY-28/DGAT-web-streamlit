@@ -31,6 +31,7 @@ st.markdown(f"<p style='text-align: justify; color: black; font-size:18px'>{desc
 st.markdown(f"<p style='text-align: justify; color: black; font-size:18px'>{desc4}</p>", unsafe_allow_html=True) 
 st.markdown(f"<p style='text-align: justify; color: black; font-size:18px'>{desc5}</p>", unsafe_allow_html=True) 
 
+st.write("")
 st.markdown('📚 Read our preprint here! [DGAT: A Dual-Graph Attention Network for Inferring Spatial Protein Landscapes from Transcriptomics](https://www.biorxiv.org/content/10.1101/2025.07.05.662121v1)')
 
 # st.markdown(' Read our paper from here 👉 https://aacrjournals.org/cancerrescommun/article/4/8/2133/747011/Spatial-Landscape-of-Malignant-Pleural-and')    
