@@ -29,7 +29,7 @@
 import streamlit as st
 
 # page config
-st.set_page_config(page_title="Contact Us", layout="centered")
+# st.set_page_config(page_title="Contact Us", layout="centered")
 
 # some custom CSS for styling
 st.markdown(
