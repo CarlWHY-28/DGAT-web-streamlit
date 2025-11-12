@@ -143,11 +143,101 @@
 #             st.error(f"❌ Error sending email (code {status})")
 
 
+# ##########
+# # option 3
+# # use https://formspree.io/ free plan
+# import streamlit as st
+# import requests
+
+# # Custom CSS styling
+# st.markdown(
+#     """
+#     <style>
+#       .contact-form {
+#         max-width: 600px;
+#         margin: auto;
+#         padding: 30px;
+#         background-color: #f9f9f9;
+#         border-radius: 8px;
+#         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+#       }
+#       .contact-form h1 {
+#         font-size: 32px;
+#         margin-bottom: 10px;
+#       }
+#       .contact-form p {
+#         font-size: 16px;
+#         color: #555;
+#         margin-bottom: 20px;
+#       }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
+
+# # Contact form
+# st.markdown('<div class="contact-form">', unsafe_allow_html=True)
+# st.markdown("<h1>Contact Us</h1>", unsafe_allow_html=True)
+# st.markdown("<p>We're here to help. Send us a message and we'll get back to you asap.</p>", unsafe_allow_html=True)
+
+# name = st.text_input("Name *", placeholder="Your full name")
+# email = st.text_input("Email *", placeholder="your.email@example.com")
+# subject = st.text_input("Subject", placeholder="What's this about?")
+# message = st.text_area("Message *", placeholder="Write your message here…")
+
+# if st.button("Send Message"):
+#     # Validate inputs
+#     if not name or not email or not message:
+#         st.warning("⚠️ Please fill in all required fields (Name, Email, and Message).")
+#     else:
+#         # Send via Formspree
+#         formspree_url = "https://formspree.io/f/xblqljeo"  # Get this from formspree.io
+        
+#         data = {
+#             "name": name,
+#             "email": email,
+#             "subject": subject,
+#             "message": message
+#         }
+        
+#         try:
+#             response = requests.post(formspree_url, data=data)
+#             if response.status_code == 200:
+#                 st.success("✅ Message sent successfully! We'll get back to you soon.")
+#             else:
+#                 st.error("❌ Something went wrong. Please try again or email us directly.")
+#         except Exception as e:
+#             st.error("❌ Unable to send message. Please contact us directly at the email below.")
+
+# st.markdown("</div>", unsafe_allow_html=True)
+
+# # Contact information
+# st.markdown("---")
+# st.markdown("### Direct Contact Information")
+# st.markdown("**Address:** 5607 Baum Blvd, Pittsburgh PA, 15215")
+# st.markdown("")
+# st.markdown(
+#     """<span style="font-size:16px;">
+#     <strong>Hatice Osmanbeyoglu</strong><br>
+#     Principal Investigator<br>
+#     ✉️ osmanbeyogluhu@pitt.edu
+#     </span>""", 
+#     unsafe_allow_html=True
+# )
+# st.markdown("")
+# st.markdown(
+#     """<span style="font-size:16px;">
+#     <strong>Haoyu Wang</strong><br>
+#     PhD Student<br>
+#     ✉️ haw309@pitt.edu
+#     </span>""", 
+#     unsafe_allow_html=True
+# )
+
 ##########
-# option 3
-# use https://formspree.io/ free plan
+# option 4
 import streamlit as st
-import requests
+from urllib.parse import quote
 
 # Custom CSS styling
 st.markdown(
@@ -170,6 +260,20 @@ st.markdown(
         color: #555;
         margin-bottom: 20px;
       }
+      .email-button {
+        display: inline-block;
+        background-color: #0066cc;
+        color: white;
+        padding: 14px 28px;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+      }
+      .email-button:hover {
+        background-color: #005bb5;
+      }
     </style>
     """,
     unsafe_allow_html=True
@@ -181,33 +285,31 @@ st.markdown("<h1>Contact Us</h1>", unsafe_allow_html=True)
 st.markdown("<p>We're here to help. Send us a message and we'll get back to you asap.</p>", unsafe_allow_html=True)
 
 name = st.text_input("Name *", placeholder="Your full name")
-email = st.text_input("Email *", placeholder="your.email@example.com")
+email = st.text_input("Your Email *", placeholder="your.email@example.com")
 subject = st.text_input("Subject", placeholder="What's this about?")
 message = st.text_area("Message *", placeholder="Write your message here…")
 
 if st.button("Send Message"):
-    # Validate inputs
     if not name or not email or not message:
-        st.warning("⚠️ Please fill in all required fields (Name, Email, and Message).")
+        st.warning("⚠️ Please fill in all required fields.")
     else:
-        # Send via Formspree
-        formspree_url = "https://formspree.io/f/xblqljeo"  # Get this from formspree.io
+        # Create mailto link
+        to_email = "osmanbeyogluhu@pitt.edu"
+        email_subject = quote(subject or "Contact Form Submission")
+        email_body = quote(f"Name: {name}\nEmail: {email}\n\n{message}")
+        mailto_link = f"mailto:{to_email}?subject={email_subject}&body={email_body}"
         
-        data = {
-            "name": name,
-            "email": email,
-            "subject": subject,
-            "message": message
-        }
+        st.success("✅ Opening your email client...")
+        st.markdown(
+            f'<a href="{mailto_link}" class="email-button" target="_blank">Click here if email didn\'t open</a>',
+            unsafe_allow_html=True
+        )
         
-        try:
-            response = requests.post(formspree_url, data=data)
-            if response.status_code == 200:
-                st.success("✅ Message sent successfully! We'll get back to you soon.")
-            else:
-                st.error("❌ Something went wrong. Please try again or email us directly.")
-        except Exception as e:
-            st.error("❌ Unable to send message. Please contact us directly at the email below.")
+        # Auto-redirect with JavaScript
+        st.markdown(
+            f'<script>window.location.href = "{mailto_link}";</script>',
+            unsafe_allow_html=True
+        )
 
 st.markdown("</div>", unsafe_allow_html=True)
 
@@ -220,7 +322,7 @@ st.markdown(
     """<span style="font-size:16px;">
     <strong>Hatice Osmanbeyoglu</strong><br>
     Principal Investigator<br>
-    ✉️ osmanbeyogluhu@pitt.edu
+    ✉️ <a href="mailto:osmanbeyogluhu@pitt.edu">osmanbeyogluhu@pitt.edu</a>
     </span>""", 
     unsafe_allow_html=True
 )
@@ -229,7 +331,7 @@ st.markdown(
     """<span style="font-size:16px;">
     <strong>Haoyu Wang</strong><br>
     PhD Student<br>
-    ✉️ haw309@pitt.edu
+    ✉️ <a href="mailto:haw309@pitt.edu">haw309@pitt.edu</a>
     </span>""", 
     unsafe_allow_html=True
 )
