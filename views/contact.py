@@ -87,7 +87,7 @@ st.markdown("<h1>Contact Us</h1>", unsafe_allow_html=True)
 st.markdown("<p>We’re here to help. Send us a message and we'll get back to you asap.</p>", unsafe_allow_html=True)
 
 name = st.text_input("Name *", placeholder="Your full name")
-email = st.text_input("Email *", placeholder="you@example.com")
+email = st.text_input("Email *", placeholder="xim33@pitt.edu")
 subject = st.text_input("Subject", placeholder="What’s this about?")
 message = st.text_area("Message *", placeholder="Write your message here…")
 
