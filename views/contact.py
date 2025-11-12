@@ -5,7 +5,7 @@ a, b = st.columns([1, 1.6 ])
 a.image('https://wexfordscitech.com/wp-content/uploads/2021/03/Assembly-web-5.png')
 
 a.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
-a.markdown("""<span style="font-size:18px;">Xiaojun Ma<br>Senior Software Engineer<br>✉️ xim33@pitt.edu</span>""", unsafe_allow_html=True)
+a.markdown("""<span style="font-size:18px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
 b.markdown("""<span style="font-size:18px;">University of Pittsburgh, UPMC Hillman Cancer Center, Assembly Building</span>""", unsafe_allow_html=True)
 
 st.markdown("#")
