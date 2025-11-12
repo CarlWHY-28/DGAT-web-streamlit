@@ -14,6 +14,6 @@ st.markdown("""
 <p ><i>Haoyu Wang, Brittany A Cody, Hatice Ulku Osmanbeyoglu.</i>  “DGAT: A Dual-Graph Attention Network for Spatially Resolved Protein Imputation from Transcriptomic Data,” <i>bioRxiv 2025.07.05.662121; doi: https://doi.org/10.1101/2025.07.05.662121.</p>
 <li><b>Commercial Use:</b> Contact the DGAT team for licensing options.</li>
 </ul>
-</div>
+# </div>
 """, unsafe_allow_html=True)
 
