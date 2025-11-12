@@ -123,17 +123,54 @@ with tab1:
 
 with tab2:
     st.subheader("Data Requirements")
+    # st.markdown("""
+    #     To ensure the analysis tools can process your data correctly, please make sure your `.h5ad` file meets the following requirements:
+
+    #     **1. File Format:** `h5ad` (Anndata)
+
+    #     **2. Required Data Slots:**
+    #     * `adata.X`: Raw count matrix (prefer non-normalized counts; preprocessing will be handled by our pipeline).
+    #     * `adata.obs`: Cell/Spot metadata.
+    #     * `adata.var`: Gene metadata (e.g., gene names).
+    #     * `adata.obsm['spatial']`: **(CRITICAL)** Spatial coordinates (N×2 array for x/y). **Spatial analysis is impossible without this.**
+
+    #     **3. File Size:**  
+    #     Keep the file size under ~200MB for smooth upload performance.
+    # """)
+
+
     st.markdown("""
-        To ensure the analysis tools can process your data correctly, please make sure your `.h5ad` file meets the following requirements:
-
-        **1. File Format:** `h5ad` (Anndata)
-
-        **2. Required Data Slots:**
-        * `adata.X`: Raw count matrix (prefer non-normalized counts; preprocessing will be handled by our pipeline).
-        * `adata.obs`: Cell/Spot metadata.
-        * `adata.var`: Gene metadata (e.g., gene names).
-        * `adata.obsm['spatial']`: **(CRITICAL)** Spatial coordinates (N×2 array for x/y). **Spatial analysis is impossible without this.**
-
-        **3. File Size:**  
-        Keep the file size under ~200MB for smooth upload performance.
+    ### 🧭 **Dataset Preparation Guide for DGATviz**
+    
+    To ensure successful processing and visualization, please prepare your dataset in the following format and structure **before uploading** to DGATviz.
+    
+    ---
+    
+    #### 1️⃣ **File Format**
+    
+    - The input file must be in **`.h5ad` (AnnData)** format.
+    
+    ---
+    
+    #### 2️⃣ **Required Data Components**
+    
+    - **`adata.X`** — Raw count matrix  
+      *(Preferably non-normalized; preprocessing and normalization are handled automatically by the DGAT pipeline.)*
+    
+    - **`adata.obs`** — Cell or spot metadata  
+      *(e.g., barcodes, sample identifiers, or annotations.)*
+    
+    - **`adata.var`** — Gene metadata  
+      *(e.g., gene names or Ensembl IDs.)*
+    
+    - **`adata.obsm['spatial']`** — Spatial coordinates as an **N×2 array** (x/y positions).  
+    
+      ⚠️ **This field is essential.** Spatial analysis cannot be performed without valid coordinates.
+    
+    ---
+    
+    #### 3️⃣ **File Size Limit**
+    
+    - **Recommended maximum file size:** ≤ **200 MB**  
+      *(to ensure smooth and reliable upload performance.)*
     """)
