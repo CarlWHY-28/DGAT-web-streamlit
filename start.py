@@ -155,13 +155,14 @@ s_tf_page = st.Page(page="views/spatial_tf.py",        title="TF Activity Maps",
 s_pathway_page = st.Page(page="views/spatial_pathway.py", title="Pathway Activity Maps", icon=emoji)
 contact_page = st.Page(page="views/contact.py",        title="Contact us",         icon=emoji)
 citation_page = st.Page(page="views/citation.py",      title="Citation",           icon=emoji)
+termofuse_page = st.Page(page="views/termofuse.py",      title="Citation",           icon=emoji)
 upload_page = st.Page(page="views/upload.py",          title="Upload Data",        icon=emoji)
 view_uploaded_page = st.Page(page="views/view_uploaded.py", title="View your data", icon=emoji)
 
 nav_groups = {
     "": [home_page, datasets_page],
     "Impute Your Data": [upload_page],
-    "Resources": [citation_page, contact_page],
+    "Resources": [termofuse_page, citation_page, contact_page],
 }
 if st.session_state.get("has_upload", False):
     nav_groups["Impute Your Data"].append(view_uploaded_page)
