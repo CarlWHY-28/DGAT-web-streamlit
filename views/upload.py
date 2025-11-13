@@ -140,7 +140,7 @@ with tab2:
 
 
     st.markdown("""
-    #### 🧭 **Dataset Preparation Guide for DGATviz**
+    
     
     To ensure successful processing and visualization, please prepare your dataset in the following format and structure **before uploading** to DGATviz.
     
