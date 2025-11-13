@@ -11,7 +11,7 @@ a.subheader("Please contact:")
 a.write("")
 a.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
 a.markdown("""<span style="font-size:16px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
-b.image('logo/dbmi.png', , use_column_width=True)
+b.image('logo/dbmi.png', use_column_width=True)
 b.markdown("""<span style="font-size:18px;">University of Pittsburgh, Department of Biomedical Informatics</span>""", unsafe_allow_html=True)
 # b.markdown("""<div style="position:relative;padding-bottom:100%;">
 #                 <iframe style="width:100%;height:100%;position:absolute;left:0px;top:0px;"
