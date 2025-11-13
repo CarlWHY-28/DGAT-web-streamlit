@@ -1,6 +1,6 @@
 import streamlit as st
 
-a, b, c, d = st.columns([2, 1, 1, 2 ])
+_, a, b, c, _ = st.columns([1, 2, 1, 1, 1 ])
 
 a.write("")
 a.write("")
@@ -12,7 +12,7 @@ c.write("")
 c.write("")
 c.image('logo/dbmi.png', use_column_width=True)
 
-a2, b2, c2 = st.columns([2,2,2])
+_, a2, b2, _ = st.columns([1, 2,2,1])
 a2.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
 a2.markdown("""<span style="font-size:16px;">Haoyu Wang<br>PhD Student<br>✉️ haw309@pitt.edu</span>""", unsafe_allow_html=True)
 
