@@ -8,7 +8,7 @@ a.write("")
 
 a.subheader("Please contact:")
 a.write("")
-a.write("")
+b.write("")
 b.write("")
 b.write("")
 b.image('logo/dbmi.png', use_column_width=True)
