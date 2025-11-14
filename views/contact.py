@@ -6,7 +6,7 @@ a.write("")
 a.write("")
 
 
-a.subheader("Please contact:")
+a.subheader("Contact us:")
 
 
 a.markdown("""<span style="font-size:16px;">Hatice Osmanbeyoglu<br>Principal Investigator<br>✉️ osmanbeyogluhu@pitt.edu</span>""", unsafe_allow_html=True)
