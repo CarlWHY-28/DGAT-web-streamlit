@@ -160,7 +160,7 @@ upload_page = st.Page(page="views/upload.py",          title="Upload Data",     
 view_uploaded_page = st.Page(page="views/view_uploaded.py", title="View your data", icon=emoji)
 
 nav_groups = {
-    "": [home_page, datasets_page],
+    "": [home_page],
     "Impute Your Data": [upload_page],
     "Resources": [termofuse_page, citation_page, contact_page],
 }
