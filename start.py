@@ -140,6 +140,8 @@ citation_page = st.Page(page="views/citation.py",      title="Citation",        
 termofuse_page = st.Page(page="views/termofuse.py",      title="Term of Use",           icon=emoji)
 upload_page = st.Page(page="views/upload.py",          title="Upload Data",        icon=emoji)
 view_uploaded_page = st.Page(page="views/view_uploaded.py", title="View your data", icon=emoji)
+spat_clust_page = st.Page(page="views/spatial_clustering.py", title="Spatial clustering", icon=emoji)
+coexpression_page = st.Page(page="views/coexpression.py", title="Co-expression / Drug targets", icon=emoji)
 
 nav_groups = {
     "": [home_page],
@@ -148,6 +150,8 @@ nav_groups = {
 }
 if st.session_state.get("has_upload", False):
     nav_groups["Impute Your Data"].append(view_uploaded_page)
+    nav_groups["Impute Your Data"].append(spat_clust_page)
+    nav_groups["Impute Your Data"].append(coexpression_page)
 
 pg = st.navigation(nav_groups)
 pg.run()
