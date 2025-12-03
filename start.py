@@ -150,7 +150,7 @@ nav_groups = {
 }
 if st.session_state.get("has_upload", False):
     nav_groups["Impute Your Data"].append(view_uploaded_page)
-    nav_groups["Impute Your Data"].append(spat_clust_page)
+    #nav_groups["Impute Your Data"].append(spat_clust_page)
     nav_groups["Impute Your Data"].append(coexpression_page)
 
 pg = st.navigation(nav_groups)
