@@ -13,7 +13,7 @@ url_REPO = 'https://raw.githubusercontent.com/CarlWHY-28/DGAT-web-resource/main'
 
 st.markdown("<h2 style='text-align: center; color: black;'>Upload and Impute Your Data</h2>", unsafe_allow_html=True)
 st.write("")
-st.info("For testing purpose, we do not predict data. However, we still run the preprocessing steps, so please upload the data.")
+st.info("For testing purpose, we do not predict data. However, we still run the preprocessing steps, so please upload the data CID44971.")
 
 if "results_ready" not in st.session_state:
     st.session_state["results_ready"] = False
