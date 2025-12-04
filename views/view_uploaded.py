@@ -112,7 +112,8 @@ def _plot_spatial_tissue_scanpy(adata, library_id: Optional[str], img_key: Optio
                 img_key=img_key,
                 show=False,
                 return_fig=True,
-                figsize=FIGSIZE
+                figsize=FIGSIZE,
+
             )
             return fig_obj if fig_obj is not None else plt.gcf()
         except Exception:
@@ -204,6 +205,34 @@ def _plot_tissue_only(adata, library_id: Optional[str], img_key: Optional[str]) 
     ax.text(0.5, 0.5, "No tissue image", ha="center", va="center", fontsize=14, transform=ax.transAxes)
     return fig
 
+def _plot_spatial_expr_mrna(adata, gene: Optional[str], library_id: Optional[str], img_key: Optional[str]) -> plt.Figure:
+    fig, ax = plt.subplots(figsize=FIGSIZE, dpi=100)
+    if gene is None or str(gene) not in _varnames(adata):
+        ax.axis("off")
+        ax.text(0.5, 0.5, "NA", ha="center", va="center", fontsize=16, transform=ax.transAxes)
+        return fig
+
+    if library_id and img_key:
+        try:
+            sc.pl.spatial(
+                adata,
+                color=str(gene),
+                library_id=library_id,
+                img_key=img_key,
+                show=False,
+                ax=ax,
+                size=1.7,
+                cmap="viridis"   # ⭐ 新增：mRNA 用 viridis
+            )
+            ax.set_xlim(ax.get_xlim())
+            ax.set_ylim(ax.get_ylim())
+            ax.set_aspect('equal', adjustable='box')
+            plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
+            return fig
+        except Exception:
+            plt.close(fig)
+
+    return _plot_scatter_expr(adata, gene)
 
 
 def _plot_spatial_expr(adata, gene: Optional[str], library_id: Optional[str], img_key: Optional[str]) -> plt.Figure:
@@ -222,7 +251,8 @@ def _plot_spatial_expr(adata, gene: Optional[str], library_id: Optional[str], im
                 img_key=img_key,
                 show=False,
                 ax=ax,
-                size=1.7
+                size=1.7,
+                cmap="plasma"   # ⭐ 新增：protein 用 plasma
             )
             ax.set_xlim(ax.get_xlim())
             ax.set_ylim(ax.get_ylim())
@@ -232,6 +262,7 @@ def _plot_spatial_expr(adata, gene: Optional[str], library_id: Optional[str], im
         except Exception:
             plt.close(fig)
 
+    # fallback scatter
     return _plot_scatter_expr(adata, gene)
 
 
@@ -322,7 +353,8 @@ with g3:
     if gene is None or str(gene) not in _varnames(adata_in):
         fig3 = _plot_image_placeholder(IMAGE_NA_PATH)
     else:
-        fig3 = _plot_spatial_expr(adata_in, gene, lib_id_in if has_img_in else None, img_key_in if has_img_in else None)
+        fig3 = _plot_spatial_expr_mrna(adata_in, gene, lib_id_in if has_img_in else None,
+                                       img_key_in if has_img_in else None)
     st.pyplot(fig3, use_container_width=True)
     plt.close(fig3)
 #
