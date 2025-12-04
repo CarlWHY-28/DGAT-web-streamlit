@@ -1,16 +1,19 @@
 import streamlit as st
 from datetime import datetime
-from dgat_utils.predict_util import web_predict
+from dgat_utils.predict_util import web_predict,test_Preprocessing
 import anndata as ad
 import traceback
 import tempfile
 import os
+import scanpy as sc
+
+st.session_state["adata_out"] = sc.read_h5ad('./data/CID44971.h5ad')
 
 url_REPO = 'https://raw.githubusercontent.com/CarlWHY-28/DGAT-web-resource/main'
 
 st.markdown("<h2 style='text-align: center; color: black;'>Upload and Impute Your Data</h2>", unsafe_allow_html=True)
 st.write("")
-st.info("Upload your spatial transcriptomics data in h5ad format. Ensure your data is correctly formatted for analysis.")
+st.info("For testing purpose, we do not predict data. However, we still run the preprocessing steps, so please upload the data.")
 
 if "results_ready" not in st.session_state:
     st.session_state["results_ready"] = False
@@ -44,8 +47,9 @@ if submit_button:
                         adata_in = ad.read_h5ad(tmp_in_path)
 
                         status.update(label="Predicting proteins… (Do **not** close this page)", state="running")
-                        adata_out = web_predict(url_REPO, adata_in)
-
+                        ### Here we do not need adata_out
+                        adata_in = test_Preprocessing(url_REPO, adata_in)
+                        adata_out = st.session_state.get("adata_out", None)
                         with tempfile.NamedTemporaryFile(suffix=".h5ad", delete=False) as tmp_out:
                             adata_out.write_h5ad(tmp_out.name)
                             final_out_path = tmp_out.name
@@ -65,7 +69,7 @@ if submit_button:
                     )
 
                     st.session_state["adata_in"] = adata_in
-                    st.session_state["adata_out"] = adata_out
+
                     try:
                         st.session_state["protein_names"] = [str(x) for x in getattr(adata_out, "var_names", [])]
                     except Exception:
