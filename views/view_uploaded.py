@@ -9,6 +9,8 @@ import os
 from typing import Optional, Tuple, List, Dict, Any
 import sys
 import psutil
+import squidpy as sq
+import random
 
 try:
     from scipy import sparse as sp
@@ -265,7 +267,22 @@ def _plot_spatial_expr(adata, gene: Optional[str], library_id: Optional[str], im
     # fallback scatter
     return _plot_scatter_expr(adata, gene)
 
+def _plot_leiden_clustering(
+    adata, 
+    ax, 
+    n_neighbors = 10, 
+    resolution = 0.5, 
+    title = None, 
+    seed = 2025
+    ):
+    random.seed(seed)
+    sc.pp.neighbors(adata, n_neighbors = n_neighbors, use_rep = 'X')
+    sc.tl.leiden(adata, resolution = resolution)
+    if 'leiden_colors' in adata.uns.keys():
+        adata.uns.pop('leiden_colors')
+    sq.pl.spatial_scatter(adata, color = "leiden", title = title, ax = ax)
 
+    ax.get_legend().set_title("Leiden cluster")
 
 has_img_out, lib_id_out, img_key_out, spatial_meta_out = _probe_spatial_meta(adata_out)
 has_img_in,  lib_id_in,  img_key_in,  spatial_meta_in  = _probe_spatial_meta(adata_in)
@@ -361,3 +378,30 @@ with g3:
 #
 # process = psutil.Process(os.getpid())
 # mem_info = process.memory_info()
+
+st.markdown("<h2 style='text-align: center; color: black;'>Spatial Leiden clustering</h2>", unsafe_allow_html=True)
+st.write("")
+
+g1_b, g2_b = st.columns(2)
+
+with g1_b:
+    #resolution_protein = st.slider("Select a resolution.", min_value = 0.2, max_value = 2.0, value = 0.5, step = 0.1)
+    #n_neighbors_protein = st.slider("Select the number of neighbors.", min_value = 10, max_value = 100, value = 10, step = 10, key = "n_neighbors_protein_slider")
+    resolution_protein = st.number_input("Resolution:", min_value = 0.2, max_value = 2.0, value = 0.5, step = 0.1)
+    n_neighbors_protein = st.number_input("Number of neighbors:", min_value = 10, max_value = 100, value = 10, step = 10, key = "n_neighbors_protein_input")
+    
+    fig_protein, ax_protein = plt.subplots()
+    _plot_leiden_clustering(adata_out, ax = ax_protein, n_neighbors = n_neighbors_protein, resolution = resolution_protein, title = "Protein")
+    st.pyplot(fig_protein, use_container_width = True)
+    plt.close(fig_protein)
+
+with g2_b:
+    #resolution_mRNA = st.slider("Select a resolution.", min_value = 0.2, max_value = 2.0, value = 1.0, step = 0.1)
+    #n_neighbors_mRNA = st.slider("Select the number of neighbors.", min_value = 10, max_value = 100, value = 10, step = 10, key = "n_neighbors_mRNA_slider")
+    resolution_mRNA = st.number_input("Resolution:", min_value = 0.2, max_value = 2.0, value = 1.0, step = 0.1)
+    n_neighbors_mRNA = st.number_input("Number of neighbors:", min_value = 10, max_value = 100, value = 10, step = 10, key = "n_neighbors_mRNA_input")
+    
+    fig_mRNA, ax_mRNA = plt.subplots()
+    _plot_leiden_clustering(adata_in, ax = ax_mRNA, n_neighbors = n_neighbors_mRNA, resolution = resolution_mRNA, title = "mRNA")
+    st.pyplot(fig_mRNA, use_container_width = True)
+    plt.close(fig_mRNA)
