@@ -379,6 +379,7 @@ with g2:
     st.pyplot(fig2, use_container_width=True)
     plt.close(fig2)
 
+
 with g3:
     st.caption("Spatial mRNA Expression (Your Data)")
     if gene is None or str(gene) not in _varnames(adata_in):
