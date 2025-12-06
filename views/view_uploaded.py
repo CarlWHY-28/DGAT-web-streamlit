@@ -89,7 +89,6 @@ def _probe_spatial_meta(adata) -> Tuple[bool, Optional[str], Optional[str], Dict
                     img_key = k
                     break
             if img_key is None:
-                # 用第一个 key 兜底
                 img_key = list(images_dict.keys())[0]
             return True, lib, img_key, {"libs": libs, "img_keys": list(images_dict.keys())}
         for k in candidates:
@@ -334,6 +333,21 @@ else:
 
 st.divider()
 
+
+with st.expander("ℹ️ Data Preprocessing & Missing Value Handling"):
+    st.markdown("""
+    **mRNA Preprocessing Workflow:**
+    The Spatial Transcriptomics (ST) data underwent the following preprocessing steps (`preprocess_ST`):
+    1.  **Normalization:** Total counts per cell were normalized to a target sum of **10,000**.
+    2.  **Log Transformation:** Data was transformed using `log1p` (natural logarithm of 1 + x).
+    3.  **Scaling:** Data was scaled to unit variance, with values clipped to a maximum of **10**.
+
+    **Handling Missing Genes:**
+    * **Imputation of Zeros:** If a gene (mRNA) is present in the protein prediction target list but **missing** in the original ST sample, it is automatically filled with **0** for calculation and visualization purposes.
+    """)
+
+
+
 g1, g2, g3 = st.columns(3)
 
 with g1:
@@ -343,13 +357,13 @@ with g1:
     plt.close(fig1)
 
 with g2:
-    st.caption("Spatial protein expression (imputed)")
+    st.caption("Spatial Protein Expression (Imputed)")
     fig2 = _plot_spatial_expr(adata_out, gene, lib_id_out if has_img_out else None, img_key_out if has_img_out else None)
     st.pyplot(fig2, use_container_width=True)
     plt.close(fig2)
 
 with g3:
-    st.caption("Spatial mRNA expression (your data)")
+    st.caption("Spatial mRNA Expression (Your Data)")
     if gene is None or str(gene) not in _varnames(adata_in):
         fig3 = _plot_image_placeholder(IMAGE_NA_PATH)
     else:
