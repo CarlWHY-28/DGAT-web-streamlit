@@ -122,7 +122,7 @@ with tab1:
         Only an `.h5ad` file is required. No personal information is needed. We will not store your data beyond the session so feel free to upload sensitive data.
 
         **Q3: How long does the upload and processing take?**  
-        It depends on your file size and Internet speed. Please keep this tab open during processing. Normally, it takes 5~10 minutes for files under 300MB. For a faster imputation, consider using our DGAT on local machines, view our GitHub Repo <a href = 'https://github.com/osmanbeyoglulab/DGAT' >here/</a>.
+        It depends on your file size and Internet speed. Please keep this tab open during processing. Normally, it takes 5~10 minutes for files under 300MB. For a faster imputation, consider using our DGAT on local machines, view our GitHub Repo [here](https://github.com/osmanbeyoglulab/DGAT).
     """)
 
 with tab2:
@@ -165,7 +165,7 @@ with tab2:
       *(e.g., barcodes, sample identifiers, or annotations.)*
     
     - **`adata.var`** — Gene metadata  
-      *(e.g., gene names or Ensembl IDs.)*
+      *(e.g., gene names)*
     
     - **`adata.obsm['spatial']`** — Spatial coordinates as an **N×2 array** (x/y positions).  
     
