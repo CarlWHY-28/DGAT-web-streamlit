@@ -69,7 +69,18 @@ for i in range(n_nodes):
             net.add_edge(row_id, col_id, title = title, width = 1, smooth = False)
 
 net.toggle_physics(False)
-
+options_script = """
+var options = {
+    "interaction": {
+        "navigationButtons": true,
+        "keyboard": true
+    },
+    "physics": {
+        "enabled": false
+    }
+}
+"""
+net.set_options(options_script)
 # Save and render in Streamlit
 net.save_graph("graph.html")
 with open("graph.html", "r", encoding="utf-8") as f:
