@@ -274,9 +274,8 @@ def _plot_leiden_clustering(
     title = None, 
     seed = 2025
     ):
-    random.seed(seed)
-    sc.pp.neighbors(adata, n_neighbors = n_neighbors, use_rep = 'X')
-    sc.tl.leiden(adata, resolution = resolution)
+    sc.pp.neighbors(adata, n_neighbors = n_neighbors, use_rep = 'X', random_state = seed)
+    sc.tl.leiden(adata, resolution = resolution, random_state = seed)
     if 'leiden_colors' in adata.uns.keys():
         adata.uns.pop('leiden_colors')
     sq.pl.spatial_scatter(adata, color = "leiden", title = title, ax = ax)
@@ -285,62 +284,6 @@ def _plot_leiden_clustering(
 
 has_img_out, lib_id_out, img_key_out, spatial_meta_out = _probe_spatial_meta(adata_out)
 has_img_in,  lib_id_in,  img_key_in,  spatial_meta_in  = _probe_spatial_meta(adata_in)
-# #
-# with st.expander("Debug (click to expand)"):
-#     st.write("adata_out.uns keys:", list(getattr(adata_out, "uns_keys", lambda: adata_out.uns.keys())()))
-#     st.write("adata_out.obsm keys:", list(getattr(adata_out, "obsm_keys", lambda: adata_out.obsm.keys())()))
-#     st.write("Detected (out) library_id:", lib_id_out, "img_key:", img_key_out)
-#     if _has_spatial_coords(adata_out):
-#         st.write("obsm['spatial'] shape (adata_out):", adata_out.obsm["spatial"].shape)
-#
-#     st.write("---")
-#     st.write("adata_in.uns keys:", list(getattr(adata_in, "uns_keys", lambda: adata_in.uns.keys())()))
-#     st.write("adata_in.obsm keys:", list(getattr(adata_in, "obsm_keys", lambda: adata_in.obsm.keys())()))
-#     st.write("Detected (in) library_id:", lib_id_in, "img_key:", img_key_in)
-#     if _has_spatial_coords(adata_in):
-#         st.write("obsm['spatial'] shape (adata_in):", adata_in.obsm["spatial"].shape)
-#
-#     st.write("---")
-#     st.write("adata_out.var_names (first 10):", _varnames(adata_out)[:10])
-#
-# with st.expander("Debug - Image Data Check"):
-#     st.write("Checking actual image data...")
-#     try:
-#         spatial_dict = adata_out.uns["spatial"]
-#         lib_dict = spatial_dict["CytAssist_FFPE_Protein_Expression_Human_Breast_Cancer"]
-#         st.write("Library dict keys:", list(lib_dict.keys()))
-#
-#         if "images" in lib_dict:
-#             images_dict = lib_dict["images"]
-#             st.write("Images dict keys:", list(images_dict.keys()))
-#
-#             if "hires" in images_dict:
-#                 hires_img = images_dict["hires"]
-#                 st.write("Hires image type:", type(hires_img))
-#                 st.write("Hires image shape:", getattr(hires_img, "shape", "No shape attribute"))
-#                 st.write("Hires image dtype:", getattr(hires_img, "dtype", "No dtype attribute"))
-#
-#                 if hires_img is not None:
-#                     fig_test = plt.figure(figsize=(5, 5))
-#                     plt.imshow(hires_img)
-#                     plt.axis("off")
-#                     plt.title("Direct image display test")
-#                     st.pyplot(fig_test)
-#                     plt.close(fig_test)
-#             else:
-#                 st.error("'hires' key not found in images dict")
-#         else:
-#             st.error("'images' key not found in library dict")
-#
-#         if "scalefactors" in lib_dict:
-#             st.write("Scalefactors:", lib_dict["scalefactors"])
-#
-#     except Exception as e:
-#         st.error(f"Error checking image: {e}")
-#         import traceback
-#
-#         st.code(traceback.format_exc())
-#
 
 if len(protein_names) == 0:
     st.info("No proteins found in adata_out.var_names")
@@ -411,8 +354,7 @@ with g1_b:
     plt.close(fig_protein)
 
 with g2_b:
-    #resolution_mRNA = st.slider("Select a resolution.", min_value = 0.2, max_value = 2.0, value = 1.0, step = 0.1)
-    #n_neighbors_mRNA = st.slider("Select the number of neighbors.", min_value = 10, max_value = 100, value = 10, step = 10, key = "n_neighbors_mRNA_slider")
+
     resolution_mRNA = st.number_input("Resolution:", min_value = 0.2, max_value = 2.0, value = 1.0, step = 0.1)
     n_neighbors_mRNA = st.number_input("Number of neighbors:", min_value = 10, max_value = 100, value = 10, step = 10, key = "n_neighbors_mRNA_input")
     
