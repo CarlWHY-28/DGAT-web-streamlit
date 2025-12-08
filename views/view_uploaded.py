@@ -272,7 +272,7 @@ def _plot_leiden_clustering(
     n_neighbors = 10, 
     resolution = 0.5, 
     title = None, 
-    seed = 2025
+    seed = 0
     ):
     sc.pp.neighbors(adata, n_neighbors = n_neighbors, use_rep = 'X', random_state = seed)
     sc.tl.leiden(adata, resolution = resolution, random_state = seed)
