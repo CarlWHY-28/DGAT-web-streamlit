@@ -164,8 +164,8 @@ with tab2:
     - **`adata.obs`** — Cell or spot metadata  
       *(e.g., barcodes, sample identifiers, or annotations.)*
     
-    - **`adata.var`** — Gene metadata  
-      *(e.g., gene names or Ensembl IDs.)*
+    - **`adata.var`** — Gene names  
+      
     
     - **`adata.obsm['spatial']`** — Spatial coordinates as an **N×2 array** (x/y positions).  
     
