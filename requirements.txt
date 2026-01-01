@@ -17,6 +17,8 @@ pyvis==0.3.2
 squidpy==1.6.5
 plotly
 scikit-learn==1.4.2
+streamlit_agraph
+
 
 # ===== PyTorch (CPU only) =====
 --extra-index-url https://download.pytorch.org/whl/cpu
