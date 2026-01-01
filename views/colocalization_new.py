@@ -21,7 +21,7 @@ st.markdown("<h2 style='text-align: center; color: black;'>Spatial Colocalizatio
 st.write("")
 
 # --- 2. 获取任务上下文 ---
-feature_code = st.session_state.get("feature_code")
+feature_code = st.session_state.get("current_feature_code")
 if not feature_code:
     st.warning("No Task ID found. Please run the analysis first.")
     st.stop()
