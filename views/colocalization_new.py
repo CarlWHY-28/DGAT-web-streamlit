@@ -4,7 +4,7 @@ import io
 import os
 import plotly.graph_objects as go
 from streamlit_agraph import agraph, Node, Edge, Config
-from task_manager import get_s3_client, get_image_url
+from dgat_utils.task_manager import get_s3_client, get_image_url
 
 # --- 1. 样式与配置 ---
 st.markdown("""
