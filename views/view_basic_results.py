@@ -1,14 +1,9 @@
 import streamlit as st
 import os
-from dgat_utils.task_manager import get_s3_client
+from dgat_utils.task_manager import get_s3_client,get_image_url
 
 # 核心：生成 Presigned URL 的辅助函数
-def get_image_url(s3_client, bucket, key):
-    return s3_client.generate_presigned_url(
-        'get_object',
-        Params={'Bucket': bucket, 'Key': key},
-        ExpiresIn=1800 # 30分钟有效期
-    )
+
 
 st.title("View Result Gallery")
 

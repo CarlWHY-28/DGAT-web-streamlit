@@ -66,6 +66,12 @@ def get_s3_client():
 #     except Exception as e:
 #         print(f"Mail Error: {e}")
 
+def get_image_url(s3_client, bucket, key):
+    return s3_client.generate_presigned_url(
+        'get_object',
+        Params={'Bucket': bucket, 'Key': key},
+        ExpiresIn=1800 # 30分钟有效期
+    )
 
 def send_notification(email, code, success=True, note=''):
     subject = "DGAT Imputation Finished" if success else "DGAT Failed"
