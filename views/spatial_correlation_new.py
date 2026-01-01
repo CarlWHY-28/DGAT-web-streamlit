@@ -57,7 +57,8 @@ if moran_df is not None:
     m1, m2 = st.columns(2)
     with m1:
         # 这里假设你 CSV 里存了这些汇总信息，或者从 session_state 获取
-        st.metric("Analyzed Markers", value=len(moran_df))
+        #st.metric("Analyzed Markers", value=len(moran_df))
+        st.write(f"Analyzed Markers: {len(moran_df)}")
     with m2:
         st.write("Moran's I reflects the spatial consistency between Protein and mRNA.")
 
