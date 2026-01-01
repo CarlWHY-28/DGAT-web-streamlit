@@ -73,8 +73,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     # 标题建议放在 sub_mid 内部或图片上方
-    st.write("Tissue Image")
-    st.write("\n")
+    st.caption(f"Tissue Image")
     sub_l, sub_mid, sub_r = st.columns([0.02, 0.96, 0.02])
     with sub_mid:
         st.image(
