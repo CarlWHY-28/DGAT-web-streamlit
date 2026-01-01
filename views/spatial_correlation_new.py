@@ -23,7 +23,8 @@ st.markdown("<h2 style='text-align: center; color: black;'>Spatial Correlation A
 
 # --- 2. 获取任务上下文 ---
 # 假设你在 URL 参数或 SessionState 中存了 feature_code
-feature_code = st.session_state.get("feature_code") or st.query_params.get("task")
+feature_code = st.session_state.get("current_feature_code") or st.query_params.get("task")
+
 if not feature_code:
     st.warning("No task ID found. Please go to **Upload Data** or check your link.")
     st.stop()
