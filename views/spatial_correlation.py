@@ -8,7 +8,7 @@ import pandas as pd
 from typing import Optional, Tuple, List, Dict, Any
 import sys
 import psutil
-from dgat_utils.downstream import compute_moran_single
+from dgat_utils.task_manager import compute_moran_single
 from scipy import sparse as sp
 
 FIGSIZE = (4.8, 4.8)
