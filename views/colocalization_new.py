@@ -66,6 +66,7 @@ if search_term:
 
 st.dataframe(
     display_df,
+    use_container_width= True,
     height=300,  # 移除 use_container_width=True
     column_config={
         "Bivariate_Moran_I": st.column_config.NumberColumn(
@@ -221,5 +222,5 @@ with tab2:
                 color="#33FF57" if row['Bivariate_Moran_I'] > 0 else "#FF3357"
             ))
 
-        config = Config(width=600, height=500, physics=True, interaction={'navigationButtons': True})
+        config = Config(width=600, height=500, physics=True, interaction={'navigationButtons': True},directed=False)
         agraph(nodes=nodes, edges=edges, config=config)
