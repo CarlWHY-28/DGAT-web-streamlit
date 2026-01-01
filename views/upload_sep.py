@@ -2,7 +2,7 @@ import streamlit as st
 import uuid
 import os
 from dgat_utils.task_manager import Session, ProteinTask, get_s3_client
-
+import gc
 st.header("Upload and Submit Your Task")
 st.info("Upload your `.h5ad` file and we will notify you via email once computation is done.")
 
@@ -45,3 +45,75 @@ if submit:
         gc.collect()
     else:
         st.warning("Please provide both file and email.")
+
+
+st.write("")
+st.divider()
+tab1, tab2 = st.tabs(["Frequently Asked Questions (FAQ)", "Data Requirements"])
+
+with tab1:
+    st.subheader("Frequently Asked Questions (FAQ)")
+    st.markdown("""
+        **Q1: What is this upload page for?**  
+        This page is used to upload your spatial transcriptomics data (in `h5ad` format) for protein imputation.
+
+        **Q2: What information do I need to provide?**  
+        Only an `.h5ad` file is required. No personal information is needed. We will not store your data beyond the session so feel free to upload sensitive data.
+
+        **Q3: How long does the upload and processing take?**  
+        It depends on your file size and Internet speed. Please keep this tab open during processing. Normally, it takes 5~10 minutes for files under 300MB. For a faster imputation, consider using our DGAT on local machines, view our GitHub Repo [here](https://github.com/osmanbeyoglulab/DGAT).
+    """)
+
+with tab2:
+    st.subheader("Data Requirements")
+    # st.markdown("""
+    #     To ensure the analysis tools can process your data correctly, please make sure your `.h5ad` file meets the following requirements:
+
+    #     **1. File Format:** `h5ad` (Anndata)
+
+    #     **2. Required Data Slots:**
+    #     * `adata.X`: Raw count matrix (prefer non-normalized counts; preprocessing will be handled by our pipeline).
+    #     * `adata.obs`: Cell/Spot metadata.
+    #     * `adata.var`: Gene metadata (e.g., gene names).
+    #     * `adata.obsm['spatial']`: **(CRITICAL)** Spatial coordinates (N×2 array for x/y). **Spatial analysis is impossible without this.**
+
+    #     **3. File Size:**
+    #     Keep the file size under ~200MB for smooth upload performance.
+    # """)
+
+    st.markdown("""
+
+
+    To ensure successful processing and visualization, please prepare your dataset in the following format and structure **before uploading** to DGATviz.
+
+    ---
+
+    ##### **1. File Format**
+
+    - The input file must be in **`.h5ad` (AnnData)** format.
+
+    ---
+
+    ##### **2. Required Data Components**
+
+    - **`adata.X`** — Raw count matrix  
+      *(Preferably non-normalized; preprocessing and normalization are handled automatically by the DGAT pipeline.)*
+
+    - **`adata.obs`** — Cell or spot metadata  
+      *(e.g., barcodes, sample identifiers, or annotations.)*
+
+    - **`adata.var`** — Gene names  
+
+
+    - **`adata.obsm['spatial']`** — Spatial coordinates as an **N×2 array** (x/y positions).  
+
+      ⚠️ **This field is essential.** Spatial analysis cannot be performed without valid coordinates.
+
+    ---
+
+    ##### **3. File Size Limit**
+
+    - **Recommended maximum file size:** ≤ **200 MB**  
+      *(to ensure smooth and reliable upload performance.)*
+    """)
+
