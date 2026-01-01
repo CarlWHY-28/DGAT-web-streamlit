@@ -31,6 +31,7 @@ with st.form("upload_form"):
 if submit:
     if uploaded_file and email:
         st.session_state.uploading = True
+        st.session_state["current_feature_code"] = None
         feature_code = str(uuid.uuid4())[:8].upper()
         bucket_name = os.getenv("BUCKET_NAME")
         input_key = f"task_{feature_code}/input.h5ad"

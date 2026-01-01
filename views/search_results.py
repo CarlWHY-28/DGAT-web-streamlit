@@ -64,6 +64,8 @@ if st.session_state.get("results_ready", False):
 
     if open_now:
         try:
+            st.session_state["current_feature_code"] = search_code
             st.switch_page("views/view_basic_results.py")
+
         except Exception:
             st.rerun()
