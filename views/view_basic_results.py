@@ -75,7 +75,6 @@ with col1:
     with sub_mid:
         st.image(
             get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"),
-            use_container_width=True,  # 让图片填满这 90% 的子列
             channels="RGB"
         )
 
