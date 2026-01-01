@@ -60,7 +60,7 @@ if moran_df is not None:
         #st.metric("Analyzed Markers", value=len(moran_df))
         st.write(f"Analyzed Markers: {len(moran_df)}")
     with m2:
-        st.write("Moran's I reflects the spatial consistency between Protein and mRNA.")
+        st.write("Moran's I reflects the spatial consistency")
 
     st.dataframe(moran_df, use_container_width=True, height=300)
     #st.dataframe(display_df, use_container_width=True, height=300)
