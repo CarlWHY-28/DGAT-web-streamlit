@@ -14,6 +14,26 @@ st.title("View Result Gallery")
 
 # 从 Session State 获取当前查看的特征码
 feature_code = st.session_state.get("current_feature_code")
+
+# --- 诊断代码段 ---
+with st.expander("🔍 Debug: Check Bucket Files"):
+    try:
+        s3 = get_s3_client()
+        bucket = os.getenv("BUCKET_NAME")
+        prefix = f"task_{feature_code}/plots/"
+        response = s3.list_objects_v2(Bucket=bucket, Prefix=prefix)
+
+        if 'Contents' in response:
+            st.write("✅ Files found in S3:")
+            for obj in response['Contents']:
+                st.write(f"- {obj['Key']}")
+        else:
+            st.error(f"❌ No files found in prefix: {prefix}. Did the Worker finish drawing?")
+    except Exception as e:
+        st.error(f"Error connecting to S3: {e}")
+# --- 诊断结束 ---
+
+
 if not feature_code:
     st.warning("Please query a feature code first.")
     st.stop()
