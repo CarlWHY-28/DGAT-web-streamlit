@@ -47,3 +47,21 @@ if st.button("Check Status", type="primary"):
             st.error("🚫 Invalid Code. Please double-check your entry.")
     else:
         st.warning("Please enter a code.")
+
+
+if st.session_state.get("results_ready", False):
+    st.session_state['has_upload'] = True  # 重置，避免重复提示
+    st.info(
+        "Your results are available under **Upload Your Data → View your data** in the left sidebar. You might download the imputed data there. Uploading a new file will overwrite the previous results. Please do not refresh this page to avoid losing the imputed data.",
+        icon="ℹ️")
+    col1, col2 = st.columns([1, 3])
+    with col1:
+        open_now = st.button("Open results page", type="primary", use_container_width=True)
+    with col2:
+        st.caption("Click to jump to the results view. If the jump fails, please open it from the left sidebar.")
+
+    if open_now:
+        try:
+            st.switch_page("views/view_basic_results.py")
+        except Exception:
+            st.rerun()

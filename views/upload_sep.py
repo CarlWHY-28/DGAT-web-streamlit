@@ -6,13 +6,31 @@ import gc
 st.header("Upload and Submit Your Task")
 st.info("Upload your `.h5ad` file and we will notify you via email once computation is done.")
 
+import requests
+
+URL_REPO = 'https://raw.githubusercontent.com/CarlWHY-28/DGAT-web-resource/main'
+
+common_protein = requests.get(f"{URL_REPO}/common_protein_31.txt").text.strip().splitlines()
+st.session_state["protein_names"] = common_protein
+
+if "uploading" not in st.session_state:
+    st.session_state.uploading = False
+
+
 with st.form("upload_form"):
     email = st.text_input("Email Address (for notification)")
     uploaded_file = st.file_uploader("Choose an h5ad file", type="h5ad")
-    submit = st.form_submit_button("Submit Task", type="primary")
+    submit = st.form_submit_button(
+        "Submit Task",
+        type="primary",
+        disabled=st.session_state.uploading  # ⛔上传时禁用
+    )
+
+
 
 if submit:
     if uploaded_file and email:
+        st.session_state.uploading = True
         feature_code = str(uuid.uuid4())[:8].upper()
         bucket_name = os.getenv("BUCKET_NAME")
         input_key = f"task_{feature_code}/input.h5ad"
@@ -45,6 +63,7 @@ if submit:
         gc.collect()
     else:
         st.warning("Please provide both file and email.")
+    st.session_state.uploading = False
 
 
 st.write("")
@@ -111,9 +130,8 @@ with tab2:
 
     ---
 
-    ##### **3. File Size Limit**
+    ##### **3. File Size**
 
-    - **Recommended maximum file size:** ≤ **200 MB**  
-      *(to ensure smooth and reliable upload performance.)*
+    - **Recommended maximum file size:** ≤ **300 MB**  
     """)
 

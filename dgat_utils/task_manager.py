@@ -10,7 +10,8 @@ from datetime import datetime
 # --- 配置初始化 ---
 Base = declarative_base()
 
-# 数据库连接：处理 Railway 的 mysql:// 格式
+# 数据库连接：处理 Railway 的 mysql:// 格式mysql://root:jdakpxILhrVFxpLzuSxCjXlZFluTLGAR@mysql.railway.internal:3306/railway
+
 db_url = os.getenv("MYSQL_URL", "mysql://root:PvklhrFKKovSXiFgwRqvaqifIrwnhpdS@mysql.railway.internal:3306/railway")
 if db_url.startswith("mysql://"):
     db_url = db_url.replace("mysql://", "mysql+pymysql://", 1)
@@ -18,7 +19,6 @@ if db_url.startswith("mysql://"):
 engine = create_engine(db_url, pool_recycle=3600)
 Session = sessionmaker(bind=engine)
 
-# --- 数据库模型 ---
 class ProteinTask(Base):
     __tablename__ = 'protein_tasks'
     feature_code = Column(String(36), primary_key=True)
@@ -41,11 +41,13 @@ def get_s3_client():
         region_name="auto"
     )
 
-def send_notification(email, code, success=True):
-    subject = "DGAT 推理任务完成通知" if success else "DGAT 推理任务失败"
-    body = f"您的任务已处理完成！\n取件码为：{code}\n请前往网站输入此码查询结果。"
+def send_notification(email, code, success=True, note = ''):
+    subject = "DGAT Imputation Finished" if success else "DGAT Failed"
+    body = f"\nYour feature code is：{code}\nPlease go to the website -> Your Results to check the result."
     if not success:
-        body = f"抱歉，任务 {code} 处理过程中出现错误，请检查文件格式。"
+        body = f"Your task failed during processing, please check the file format."
+        if note:
+            body += f"\nError info: {note}"
 
     msg = MIMEText(body)
     msg['Subject'] = subject
@@ -53,8 +55,13 @@ def send_notification(email, code, success=True):
     msg['To'] = email
 
     try:
-        with smtplib.SMTP_SSL(os.getenv("SMTP_SERVER"), int(os.getenv("SMTP_PORT", 465))) as server:
-            server.login(os.getenv("SMTP_USER"), os.getenv("SMTP_PASS"))
-            server.send_message(msg)
+        # 1. 使用 587 端口建立普通 SMTP 连接
+        server = smtplib.SMTP('smtp.gmail.com', 587, timeout=30)
+        # 2. 将连接升级为加密连接 (必须)
+        server.starttls()
+        # 3. 登录并发送
+        server.login('carlwanghy@gmail.com', 'oilucthfcbwrykjf')
+        server.send_message(msg)
+        server.quit()
     except Exception as e:
         print(f"Mail Error: {e}")
