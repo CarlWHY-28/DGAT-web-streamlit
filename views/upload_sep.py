@@ -8,10 +8,7 @@ st.info("Upload your `.h5ad` file and we will notify you via email once computat
 
 import requests
 
-URL_REPO = 'https://raw.githubusercontent.com/CarlWHY-28/DGAT-web-resource/main'
 
-common_protein = requests.get(f"{URL_REPO}/common_protein_31.txt").text.strip().splitlines()
-st.session_state["protein_names"] = common_protein
 
 if "uploading" not in st.session_state:
     st.session_state.uploading = False

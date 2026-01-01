@@ -3,12 +3,18 @@
 import os, psutil, time, uuid, threading
 from typing import Callable, Any, Dict
 
+import requests
 import streamlit as st
 from style import page_style, footer
 import pandas as pd
 from persist import load_widget_state, persist
 from views.utils import get_sample_dataframe
 from style import define_layout
+URL_REPO = 'https://raw.githubusercontent.com/CarlWHY-28/DGAT-web-resource/main'
+
+common_protein = requests.get(f"{URL_REPO}/common_protein_31.txt").text.strip().splitlines()
+st.session_state["protein_names"] = common_protein
+
 
 st.set_page_config(
     page_title='DGAT',

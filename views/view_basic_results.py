@@ -42,14 +42,42 @@ s3 = get_s3_client()
 bucket = os.getenv("BUCKET_NAME")
 plot_prefix = f"task_{feature_code}/spatial_plots"
 
+
+st.divider()
+
+
+with st.expander("ℹ️ Data Preprocessing & Missing Value Handling"):
+    st.markdown("""
+    **mRNA Preprocessing Workflow:**
+    The Spatial Transcriptomics (ST) data underwent the following preprocessing steps (`preprocess_ST`):
+    1.  **Normalization:** Total counts per cell were normalized to a target sum of **10,000**.
+    2.  **Log Transformation:** Data was transformed using `log1p` (natural logarithm of 1 + x).
+    3.  **Scaling:** Data was scaled to unit variance, with values clipped to a maximum of **10**.
+
+    **Handling Missing Genes:**
+    * **Imputation of Zeros:** If a gene (mRNA) is present in the protein prediction target list but **missing** in the original ST sample, it is automatically filled with **0** for calculation and visualization purposes.
+    """)
+
+
+
 # --- 1. 蛋白质选择与展示 ---
 protein_names = st.session_state.get("protein_names", [])
 selected_p = st.selectbox("Select Protein", protein_names)
 
+
+
+
 col1, col2, col3 = st.columns(3)
 with col1:
     st.caption("Tissue Image")
-    st.image(get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"))
+    #限制显示大小，防止图片过大撑破布局
+    st.image(
+        get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"),
+        use_container_width=True,
+        clamp=True,
+        channels="RGB"
+    )
+    #st.image(get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"))
 
 with col2:
     st.caption(f"Protein: {selected_p} (Imputed)")
