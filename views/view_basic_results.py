@@ -66,12 +66,22 @@ selected_p = st.selectbox("Select Protein", protein_names)
 
 
 
+# 1. 注入 CSS 样式
+st.markdown("""
+    <style>
+    /* 定位到 columns 的父容器，强制其子元素垂直居中 */
+    [data-testid="stHorizontalBlock"] {
+        align-items: center;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns(3,vertical_alignment="center")
+# 2. 正常的列布局
+col1, col2, col3 = st.columns(3)
+
 with col1:
-    st.caption("Tissue Image")
-    # 创建子列：左右各留 5%，中间占 90%
-    sub_left, sub_mid, sub_right = st.columns([0.02, 0.96, 0.02])
+    # 标题建议放在 sub_mid 内部或图片上方
+    sub_l, sub_mid, sub_r = st.columns([0.02, 0.96, 0.02])
     with sub_mid:
         st.image(
             get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"),
