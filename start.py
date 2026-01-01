@@ -140,6 +140,7 @@ citation_page = st.Page(page="views/citation.py",      title="Citation",        
 termofuse_page = st.Page(page="views/termofuse.py",      title="Term of Use",           icon=emoji)
 #upload_page = st.Page(page="views/upload.py",          title="Upload Data",        icon=emoji)
 upload_page = st.Page(page="views/upload_sep.py",          title="Upload Data",        icon=emoji)
+search_results_page = st.Page(page="views/search_results.py", title="Your Results",     icon=emoji)
 
 view_uploaded_page = st.Page(page="views/view_uploaded.py", title="View your data", icon=emoji)
 coexpression_page = st.Page(page="views/coexpression.py", title="Co-expression / Drug targets", icon=emoji)
@@ -148,8 +149,8 @@ spatial_corr_page = st.Page(page="views/spatial_correlation.py", title="Spatial 
 colocalization_page = st.Page(page="views/colocalization.py", title="Colocalization Analysis", icon=emoji)
 nav_groups = {
     "": [home_page],
-    "Impute Your Data": [upload_page,datasets_page],
-    "Resources": [termofuse_page, citation_page, contact_page],
+    "Impute Your Data": [upload_page,search_results_page],
+    "Resources": [termofuse_page, citation_page, contact_page,datasets_page],
 }
 if st.session_state.get("has_upload", False):
     nav_groups["Impute Your Data"].append(view_uploaded_page)
