@@ -22,6 +22,8 @@ if st.button("Check Status", type="primary"):
 
             if task.status == 'completed':
                 st.success("✨ Your prediction is ready for download!")
+                st.session_state['has_upload'] = True
+                st.session_state["results_ready"] = True
 
                 # 生成安全的临时下载链接 (有效期 1 小时)
                 try:
@@ -50,7 +52,7 @@ if st.button("Check Status", type="primary"):
 
 
 if st.session_state.get("results_ready", False):
-    st.session_state['has_upload'] = True  # 重置，避免重复提示
+    st.session_state['has_upload'] = True
     st.info(
         "Your results are available under **Upload Your Data → View your data** in the left sidebar. You might download the imputed data there. Uploading a new file will overwrite the previous results. Please do not refresh this page to avoid losing the imputed data.",
         icon="ℹ️")
