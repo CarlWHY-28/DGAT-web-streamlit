@@ -20,7 +20,7 @@ with st.expander("🔍 Debug: Check Bucket Files"):
     try:
         s3 = get_s3_client()
         bucket = os.getenv("BUCKET_NAME")
-        prefix = f"task_{feature_code}/plots/"
+        prefix = f"task_{feature_code}/spatial_plots/"
         response = s3.list_objects_v2(Bucket=bucket, Prefix=prefix)
 
         if 'Contents' in response:
@@ -40,7 +40,7 @@ if not feature_code:
 
 s3 = get_s3_client()
 bucket = os.getenv("BUCKET_NAME")
-plot_prefix = f"task_{feature_code}/plots"
+plot_prefix = f"task_{feature_code}/spatial_plots"
 
 # --- 1. 蛋白质选择与展示 ---
 protein_names = st.session_state.get("protein_names", [])
