@@ -61,8 +61,8 @@ if moran_df is not None:
     with m2:
         st.write("Moran's I reflects the spatial consistency between Protein and mRNA.")
 
-    st.dataframe(moran_df, height=250)
-
+    st.dataframe(moran_df, use_container_width=True, height=300)
+    #st.dataframe(display_df, use_container_width=True, height=300)
     # 下载按钮
     csv_data = moran_df.to_csv(index=False).encode('utf-8')
     st.download_button("⬇️ Download Moran's I Table", data=csv_data, file_name='moran_stats.csv')
@@ -102,16 +102,3 @@ with col3:
     st.caption(f"mRNA: {selected_p} (Original)")
     mrna_url = get_image_url(s3, bucket, f"{plot_prefix}/mrna_{selected_p}.png")
     st.image(mrna_url)
-
-# --- 6. 数据下载区域 ---
-st.divider()
-st.subheader("3. Data Download")
-d_col1, d_col2 = st.columns(2)
-
-with d_col1:
-    # 生成预签名的 H5AD 下载链接
-    h5ad_url = get_image_url(s3, bucket, f"task_{feature_code}/output.h5ad", expires_in=3600)
-    st.link_button("⬇️ Download Predicted Data (.h5ad)", h5ad_url)
-
-with d_col2:
-    st.info("The .h5ad file contains imputed protein layers and spatial coordinates.")
