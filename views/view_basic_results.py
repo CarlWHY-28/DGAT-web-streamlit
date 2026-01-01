@@ -70,14 +70,14 @@ selected_p = st.selectbox("Select Protein", protein_names)
 col1, col2, col3 = st.columns(3)
 with col1:
     st.caption("Tissue Image")
-    #限制显示大小，防止图片过大撑破布局
-    st.image(
-        get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"),
-        clamp=True,
-        channels="RGB"
-    )
-    #st.image(get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"))
-    #放个竖直的分割线
+    # 创建子列：左右各留 5%，中间占 90%
+    sub_left, sub_mid, sub_right = st.columns([0.05, 0.9, 0.05])
+    with sub_mid:
+        st.image(
+            get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"),
+            use_container_width=True,  # 让图片填满这 90% 的子列
+            channels="RGB"
+        )
 
 
 
