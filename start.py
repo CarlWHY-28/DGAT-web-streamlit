@@ -152,7 +152,7 @@ view_uploaded_page = st.Page(page="views/view_uploaded.py", title="View your dat
 coexpression_page = st.Page(page="views/coexpression.py", title="Co-expression / Drug targets", icon=emoji)
 view_basic_results_page = st.Page(page="views/view_basic_results.py", title="Basic Results", icon=emoji)
 
-spatial_corr_page = st.Page(page="views/spatial_correlation.py", title="Spatial Correlation Analysis", icon=emoji)
+spatial_corr_page = st.Page(page="views/spatial_correlation_new.py", title="Spatial Correlation Analysis", icon=emoji)
 colocalization_page = st.Page(page="views/colocalization.py", title="Colocalization Analysis", icon=emoji)
 nav_groups = {
     "": [home_page],
