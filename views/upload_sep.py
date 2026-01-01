@@ -3,8 +3,6 @@ import uuid
 import os
 from dgat_utils.task_manager import Session, ProteinTask, get_s3_client
 
-st.set_page_config(page_title="DGAT Protein Imputation", layout="wide")
-
 tab1, tab2 = st.tabs(["📤 Upload & Submit", "🔍 Check Status & Result"])
 
 # --- Tab 1: 上传逻辑 ---
