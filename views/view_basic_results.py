@@ -73,11 +73,14 @@ with col1:
     #限制显示大小，防止图片过大撑破布局
     st.image(
         get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"),
-        use_container_width=True,
         clamp=True,
         channels="RGB"
     )
     #st.image(get_image_url(s3, bucket, f"{plot_prefix}/tissue.png"))
+    #放个竖直的分割线
+
+
+
 
 with col2:
     st.caption(f"Protein: {selected_p} (Imputed)")
