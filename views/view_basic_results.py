@@ -85,9 +85,9 @@ st.subheader("Spatial Leiden Clustering")
 c1, c2 = st.columns(2)
 
 with c1:
-    res_p = st.select_slider("Protein Resolution", options=[0.3, 0.4, 0.5, 0.6], value=0.5)
+    res_p = st.select_slider("Protein Resolution", options=[0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1], value=0.5)
     st.image(get_image_url(s3, bucket, f"{plot_prefix}/leiden_prot_{res_p}.png"))
 
 with c2:
-    res_m = st.select_slider("mRNA Resolution", options=[0.8, 0.9, 1.0, 1.1], value=1.0)
+    res_m = st.select_slider("mRNA Resolution", options=[0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1], value=0.5)
     st.image(get_image_url(s3, bucket, f"{plot_prefix}/leiden_mrna_{res_m}.png"))
