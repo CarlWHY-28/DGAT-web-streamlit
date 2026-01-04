@@ -6,10 +6,8 @@ import plotly.graph_objects as go
 from streamlit_agraph import agraph, Node, Edge, Config
 from dgat_utils.task_manager import get_s3_client, get_image_url
 
-# --- 1. 样式与布局设置 ---
 st.markdown("""
     <style>
-    /* 强制一行内的所有列垂直居中对齐 */
     [data-testid="stHorizontalBlock"] {
         align-items: center;
     }
@@ -20,7 +18,6 @@ st.markdown("<h2 style='text-align: center; color: black;'>Spatial Colocalizatio
             unsafe_allow_html=True)
 st.write("")
 
-# --- 2. 获取任务上下文 ---
 feature_code = st.session_state.get("current_feature_code")
 if not feature_code:
     st.warning("No Task ID found. Please run the analysis first.")
@@ -31,10 +28,8 @@ bucket = os.getenv("BUCKET_NAME")
 plot_prefix = f"task_{feature_code}/spatial_plots"
 
 
-# --- 3. 加载计算结果 (从 S3 读取 CSV) ---
 @st.cache_data(ttl=600)
 def load_bivariate_data(f_code):
-    """读取 Worker 计算好的双变量 Moran's I 表格"""
     try:
         obj = s3.get_object(Bucket=bucket, Key=f"task_{f_code}/bivariate_moran_colocalization.csv")
         return pd.read_csv(io.BytesIO(obj['Body'].read()))
@@ -48,7 +43,6 @@ if bivariate_df is None:
     st.info("Colocalization statistics are being processed or not available. Please refresh later.")
     st.stop()
 
-# --- 4. 统计表格展示 ---
 st.subheader("1. Colocalization Statistics (Bivariate Moran's I)")
 
 search_col, download_col = st.columns([3, 1])
@@ -67,7 +61,7 @@ if search_term:
 st.dataframe(
     display_df,
     use_container_width= True,
-    height=300,  # 移除 use_container_width=True
+    height=300,
     column_config={
         "Bivariate_Moran_I": st.column_config.NumberColumn(
             "Moran's I",
@@ -90,10 +84,8 @@ with download_col:
 
 st.divider()
 
-# --- 5. 空间可视化 (URL 图片模式) ---
 st.subheader('2. Colocalization Visualization')
 
-# 获取所有出现的蛋白名称
 all_proteins = sorted(list(set(bivariate_df['Marker_A']).union(set(bivariate_df['Marker_B']))))
 
 if len(all_proteins) < 2:
@@ -106,7 +98,6 @@ else:
         default_idx_b = 1 if len(all_proteins) > 1 else 0
         prot_b = st.selectbox("Select Protein B", options=all_proteins, index=default_idx_b, key="prot_b")
 
-    # 显示选定配对的数值
     pair_row = bivariate_df[
         ((bivariate_df['Marker_A'] == prot_a) & (bivariate_df['Marker_B'] == prot_b)) |
         ((bivariate_df['Marker_A'] == prot_b) & (bivariate_df['Marker_B'] == prot_a))
@@ -115,42 +106,33 @@ else:
         val = pair_row.iloc[0]['Bivariate_Moran_I']
         st.info(f"🔗 **Colocalization Index** ({prot_a} ↔ {prot_b}): **{val:.4f}**")
 
-    # --- 核心布局：Tissue(90%) | Protein A | Protein B ---
     g1, g2, g3 = st.columns([1, 1, 1])
 
-    # 1. Tissue Image (特殊处理)
     with g1:
         st.caption("Tissue Image")
-        # 嵌套列：左右留白 5%，中间 90%
         sub_l, sub_mid, sub_r = st.columns([0.05, 0.9, 0.05])
         with sub_mid:
-            # 直接调用 URL，不使用 use_container_width
             tissue_url = get_image_url(s3, bucket, f"{plot_prefix}/tissue.png")
             st.image(tissue_url)
 
-    # 2. Protein A Image (调用 URL)
     with g2:
         st.caption(f"Protein A: {prot_a}")
         pa_url = get_image_url(s3, bucket, f"{plot_prefix}/protein_{prot_a}.png")
         st.image(pa_url)
 
-    # 3. Protein B Image (调用 URL)
     with g3:
         st.caption(f"Protein B: {prot_b}")
         pb_url = get_image_url(s3, bucket, f"{plot_prefix}/protein_{prot_b}.png")
         st.image(pb_url)
 
-# --- 6. 高级交互分析 (基于 CSV 数据的轻量渲染) ---
 st.divider()
 st.subheader("3. Advanced Interaction: Heatmap & Network")
 
-# 准备矩阵数据
 matrix_df = bivariate_df.pivot(index='Marker_A', columns='Marker_B', values='Bivariate_Moran_I')
 matrix_df = matrix_df.reindex(index=all_proteins, columns=all_proteins)
 
 tab1, tab2 = st.tabs(["Correlation Heatmap", "Interaction Network"])
 
-# === Tab 1: Heatmap ===
 with tab1:
     st.caption("Click on a cell to view details.")
     fig_heatmap = go.Figure(data=go.Heatmap(
@@ -170,9 +152,7 @@ with tab1:
         point = select_event.selection["points"][0]
         st.info(f"🧬 {point['y']} ↔ {point['x']} : **{matrix_df.loc[point['y'], point['x']]:.4f}**")
 
-# === Tab 2: Network ===
 with tab2:
-    # 静态配置数据 (保留你原来的字典)
     MARKER_INFO = {
         "ACTA2": "Stromal / endothelial", "BCL2": "Basal epithelial", "CCR7": "T cell",
         "CD14": "Myeloid / APC", "CD163": "Myeloid / APC", "CD19": "B cell / TLS",
@@ -195,7 +175,6 @@ with tab2:
 
     with c_net1:
         threshold = st.slider("Edge Threshold", 0.0, 1.0, 0.5, 0.05)
-        # 图例渲染
         legend_html = "<div style='display: flex; flex-direction: column; gap: 5px; font-size: 12px;'>"
         for t_name, color in TYPE_COLORS.items():
             legend_html += f"<div><span style='color:{color};'>●</span> {t_name}</div>"

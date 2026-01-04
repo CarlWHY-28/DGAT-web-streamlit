@@ -2,32 +2,27 @@ import streamlit as st
 import os
 from dgat_utils.task_manager import get_s3_client,get_image_url
 
-# 核心：生成 Presigned URL 的辅助函数
-
 
 st.title("View Result Gallery")
 
-# 从 Session State 获取当前查看的特征码
 feature_code = st.session_state.get("current_feature_code")
-
-# --- 诊断代码段 ---
-with st.expander("🔍 Debug: Check Bucket Files"):
-    try:
-        s3 = get_s3_client()
-        bucket = os.getenv("BUCKET_NAME")
-        prefix = f"task_{feature_code}/spatial_plots/"
-        response = s3.list_objects_v2(Bucket=bucket, Prefix=prefix)
-
-        if 'Contents' in response:
-            st.write("✅ Files found in S3:")
-            for obj in response['Contents']:
-                st.write(f"- {obj['Key']}")
-        else:
-            st.error(f"❌ No files found in prefix: {prefix}. Did the Worker finish drawing?")
-    except Exception as e:
-        st.error(f"Error connecting to S3: {e}")
-# --- 诊断结束 ---
-
+#
+# with st.expander("🔍 Debug: Check Bucket Files"):
+#     try:
+#         s3 = get_s3_client()
+#         bucket = os.getenv("BUCKET_NAME")
+#         prefix = f"task_{feature_code}/spatial_plots/"
+#         response = s3.list_objects_v2(Bucket=bucket, Prefix=prefix)
+#
+#         if 'Contents' in response:
+#             st.write("Files found in S3:")
+#             for obj in response['Contents']:
+#                 st.write(f"- {obj['Key']}")
+#         else:
+#             st.error(f"No files found in prefix: {prefix}. Did the Worker finish drawing?")
+#     except Exception as e:
+#         st.error(f"Error connecting to S3: {e}")
+#
 
 if not feature_code:
     st.warning("Please query a feature code first.")
@@ -55,7 +50,6 @@ with st.expander("ℹ️ Data Preprocessing & Missing Value Handling"):
 
 
 
-# --- 1. 蛋白质选择与展示 ---
 protein_names = st.session_state.get("protein_names", [])
 selected_p = st.selectbox("Select Protein", protein_names)
 
@@ -63,11 +57,9 @@ selected_p = st.selectbox("Select Protein", protein_names)
 
 
 
-# 2. 正常的列布局
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    # 标题建议放在 sub_mid 内部或图片上方
     st.caption(f"Tissue Image")
     sub_l, sub_r = st.columns([0.96, 0.04])
     with sub_l:
@@ -89,7 +81,6 @@ with col3:
 
 st.divider()
 
-# --- 2. Leiden 聚类图片浏览器 ---
 st.subheader("Spatial Leiden Clustering")
 c1, c2 = st.columns(2)
 
