@@ -142,6 +142,10 @@ with tab1:
     fig_heatmap.update_layout(
         width=600, height=550,
         xaxis_showgrid=False, yaxis_showgrid=False,
+        xaxis=dict(
+            tickangle=-90,  # 旋转45度，避免水平重叠
+            #dtick=1  # 强制显示每一个标签，不让Plotly自动跳过
+        ),
         plot_bgcolor='rgba(0,0,0,0)',
         margin=dict(t=20, b=20, l=50, r=50)
     )
