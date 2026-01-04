@@ -54,7 +54,7 @@ if st.button("Check Status", type="primary"):
 if st.session_state.get("results_ready", False):
     st.session_state['has_upload'] = True
     st.info(
-        "Your results are available under **Upload Your Data → View your data** in the left sidebar. You might download the imputed data there. Uploading a new file will overwrite the previous results. Please do not refresh this page to avoid losing the imputed data.",
+        "Your results are available under **Impute Your Data → View your data** in the left sidebar. You might download the imputed data there. Uploading a new file will overwrite the previous results. Please do not refresh this page to avoid losing the imputed data.",
         icon="ℹ️")
     col1, col2 = st.columns([1, 3])
     with col1:
